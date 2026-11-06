@@ -93,7 +93,7 @@ Source code
 -----------
 
 The source code of the installer is published at:
-SOURCE-CODE-LINK-TO-BE-ADDED
+https://github.com/ProwonderGamer/FEAR-Exclusive-Console-Content
 It includes the sound decoders translated from FFmpeg, which the GNU Lesser General Public
 License requires to be offered with the program, and everything needed to rebuild the
 installer. The game add-on it installs (dinput8_hook.dll) is included there as a program,
