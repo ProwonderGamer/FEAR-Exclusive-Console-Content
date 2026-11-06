@@ -1,11 +1,20 @@
-# F.E.A.R. Exclusive Console Content: installer source
+# F.E.A.R. Exclusive Console Content
 
-This is the source code of `FEAR-Exclusive-Console-Content-Installer.exe`, the Windows installer of the
-F.E.A.R. Exclusive Console Content mod. The mod brings the content that only the console versions of F.E.A.R.
-had to the PC version: the SFOD-D bonus mission and the Watson SAS-12 from the PlayStation 3 version, and the
-Holiday bonus mission, the SM15 machine pistol, the Instant Action maps and the Xbox 360 HUD from the Xbox 360
-version.
+Restores console-exclusive content from the PlayStation 3 and Xbox 360 versions of F.E.A.R.: First Encounter Assault Recon to the PC version.
 
+This includes the **SFOD-D bonus mission** and **Watson SAS-12 shotgun** from the PlayStation 3 version, along with the **Holiday bonus mission**, **SM15 machine pistol**, **Instant Action maps** and **Xbox 360 HUD** from the Xbox 360 version.
+
+**No copyrighted game files are included in the download.** Instead, the installer builds the mod locally using files from your own copies of the game. You will need:
+
+- **PC:** F.E.A.R. (Steam or GOG) with [EchoPatch](https://github.com/Wemino/EchoPatch) installed.
+- **PlayStation 3:** your copy of the game as a decrypted disc folder.
+- **Xbox 360:** your copy of the game as an extracted disc folder.
+
+For complete requirements and step-by-step installation instructions, see **README.txt** included in the ZIP archive.
+
+## About this repository
+
+This is the source code of `FEAR-Exclusive-Console-Content-Installer.exe`, the Windows installer of the mod.
 Neither this repository nor the release download contains files from the game. The installer reads the
 player's own copies of the game (the PC game, a decrypted PlayStation 3 disc folder and an extracted Xbox 360
 disc folder) and builds every mod file from them on the player's computer.
