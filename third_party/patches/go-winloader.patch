@@ -1,0 +1,15 @@
+diff -ruN a/go-winloader/internal/winloader/loader_windows.go b/go-winloader/internal/winloader/loader_windows.go
+--- a/go-winloader/internal/winloader/loader_windows.go
++++ b/go-winloader/internal/winloader/loader_windows.go
+@@ -56,7 +56,10 @@
+ 
+ // Load loads a module into memory.
+ func (Loader) Load(libname string) (loader.Module, error) {
+-	handle, err := windows.LoadLibrary(libname)
++	// MODIFIED (see third_party/NOTICE.md): imports of an in-memory module are
++	// resolved from the system folder only, never from the application or
++	// current folder (upstream used plain LoadLibrary and its default search order).
++	handle, err := windows.LoadLibraryEx(libname, 0, windows.LOAD_LIBRARY_SEARCH_SYSTEM32)
+ 	if err != nil {
+ 		return nil, err
+ 	}

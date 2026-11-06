@@ -1,0 +1,11 @@
+# build output (rebuild with ./build.sh; the .exe is a release artifact, not source)
+/dist/
+# go fuzzing and test leftovers
+**/testdata/fuzz/
+*.test
+*.out
+# editor / OS
+.DS_Store
+Thumbs.db
+*.swp
+node_modules/

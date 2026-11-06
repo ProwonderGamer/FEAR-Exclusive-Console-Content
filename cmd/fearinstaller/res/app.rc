@@ -1,0 +1,18 @@
+#define RT_MANIFEST 24
+1 RT_MANIFEST "app.manifest"
+1 ICON "app.ico"
+
+1 VERSIONINFO
+FILEVERSION 0,1,0,0
+PRODUCTVERSION 0,1,0,0
+FILEOS 0x4
+FILETYPE 0x1
+{
+  BLOCK "StringFileInfo" { BLOCK "040904B0" {
+    VALUE "FileDescription", "F.E.A.R. Exclusive Console Content installer"
+    VALUE "ProductName", "F.E.A.R. Exclusive Console Content"
+    VALUE "FileVersion", "0.1.0.0"
+    VALUE "LegalCopyright", "Copyright (c) 2026 F.E.A.R. Exclusive Console Content contributors. See LICENSE.txt."
+  } }
+  BLOCK "VarFileInfo" { VALUE "Translation", 0x0409, 0x04B0 }
+}

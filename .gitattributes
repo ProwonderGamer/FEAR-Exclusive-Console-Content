@@ -1,0 +1,4 @@
+# Keep every file exactly as it is in the repository: git must not convert line endings on checkout.
+# The release README and our license texts use CRLF, the upstream license texts keep their own endings,
+# and tests and the build check several files byte for byte.
+* -text

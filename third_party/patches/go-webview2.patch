@@ -1,0 +1,1112 @@
+diff -ruN a/go-webview2/internal/w32/w32.go b/go-webview2/internal/w32/w32.go
+--- a/go-webview2/internal/w32/w32.go
++++ b/go-webview2/internal/w32/w32.go
+@@ -44,6 +44,35 @@
+ 	User32SetWindowPos       = user32.NewProc("SetWindowPos")
+ 	User32IsDialogMessage    = user32.NewProc("IsDialogMessage")
+ 	User32GetAncestor        = user32.NewProc("GetAncestor")
++
++	// MODIFIED: work-area and monitor queries, brush for the window background.
++	User32SystemParametersInfoW = user32.NewProc("SystemParametersInfoW")
++	User32MonitorFromWindow     = user32.NewProc("MonitorFromWindow")
++	User32GetMonitorInfoW       = user32.NewProc("GetMonitorInfoW")
++	User32GetDpiForWindow       = user32.NewProc("GetDpiForWindow")
++
++	gdi32                 = windows.NewLazySystemDLL("gdi32")
++	Gdi32CreateSolidBrush = gdi32.NewProc("CreateSolidBrush")
++)
++
++const (
++	SPIGetWorkArea          = 0x0030
++	MonitorDefaultToNearest = 2
++	WMDpiChanged            = 0x02E0
++)
++
++// MonitorInfo mirrors MONITORINFO (40 bytes).
++type MonitorInfo struct {
++	CbSize    uint32
++	RcMonitor Rect
++	RcWork    Rect
++	DwFlags   uint32
++}
++
++// Compile-time layout check for the Win32 structures passed by pointer.
++var (
++	_ [40]byte = [unsafe.Sizeof(MonitorInfo{})]byte{}
++	_ [16]byte = [unsafe.Sizeof(Rect{})]byte{}
+ )
+ 
+ const (
+diff -ruN a/go-webview2/internal/w32/w32_64bit.go b/go-webview2/internal/w32/w32_64bit.go
+--- a/go-webview2/internal/w32/w32_64bit.go
++++ b/go-webview2/internal/w32/w32_64bit.go
+@@ -4,6 +4,8 @@
+ 
+ package w32
+ 
++import "unsafe"
++
+ func GetWindowLong(hwnd uintptr, index int) uintptr {
+ 	ret, _, _ := User32GetWindowLongPtrW.Call(hwnd, uintptr(index))
+ 	return ret
+@@ -13,3 +15,6 @@
+ 	ret, _, _ := User32SetWindowLongPtrW.Call(hwnd, uintptr(index), newLong)
+ 	return ret
+ }
++
++// Compile-time layout check (64-bit): WNDCLASSEXW is 80 bytes.
++var _ [80]byte = [unsafe.Sizeof(WndClassExW{})]byte{}
+diff -ruN a/go-webview2/pkg/edge/ICoreWebView2NavigationStartingEventArgs.go b/go-webview2/pkg/edge/ICoreWebView2NavigationStartingEventArgs.go
+--- a/go-webview2/pkg/edge/ICoreWebView2NavigationStartingEventArgs.go
++++ b/go-webview2/pkg/edge/ICoreWebView2NavigationStartingEventArgs.go
+@@ -0,0 +1,26 @@
++//go:build windows
++
++package edge
++
++import "unsafe"
++
++// ICoreWebView2NavigationStartingEventArgs: slot order from WebView2.idl.
++type _ICoreWebView2NavigationStartingEventArgsVtbl struct {
++	_IUnknownVtbl
++	GetUri             ComProc
++	GetIsUserInitiated ComProc
++	GetIsRedirected    ComProc
++	GetRequestHeaders  ComProc
++	GetCancel          ComProc
++	PutCancel          ComProc
++	GetNavigationId    ComProc
++}
++
++type ICoreWebView2NavigationStartingEventArgs struct {
++	vtbl *_ICoreWebView2NavigationStartingEventArgsVtbl
++}
++
++// PutCancel cancels (true) the navigation that is starting.
++func (i *ICoreWebView2NavigationStartingEventArgs) PutCancel(cancel bool) {
++	_, _, _ = i.vtbl.PutCancel.Call(uintptr(unsafe.Pointer(i)), uintptr(boolToInt(cancel)))
++}
+diff -ruN a/go-webview2/pkg/edge/ICoreWebView2NavigationStartingEventHandler.go b/go-webview2/pkg/edge/ICoreWebView2NavigationStartingEventHandler.go
+--- a/go-webview2/pkg/edge/ICoreWebView2NavigationStartingEventHandler.go
++++ b/go-webview2/pkg/edge/ICoreWebView2NavigationStartingEventHandler.go
+@@ -0,0 +1,50 @@
++//go:build windows
++
++package edge
++
++type _ICoreWebView2NavigationStartingEventHandlerVtbl struct {
++	_IUnknownVtbl
++	Invoke ComProc
++}
++
++type ICoreWebView2NavigationStartingEventHandler struct {
++	vtbl *_ICoreWebView2NavigationStartingEventHandlerVtbl
++	impl _ICoreWebView2NavigationStartingEventHandlerImpl
++}
++
++func _ICoreWebView2NavigationStartingEventHandlerIUnknownQueryInterface(this *ICoreWebView2NavigationStartingEventHandler, refiid, object uintptr) uintptr {
++	return this.impl.QueryInterface(refiid, object)
++}
++
++func _ICoreWebView2NavigationStartingEventHandlerIUnknownAddRef(this *ICoreWebView2NavigationStartingEventHandler) uintptr {
++	return this.impl.AddRef()
++}
++
++func _ICoreWebView2NavigationStartingEventHandlerIUnknownRelease(this *ICoreWebView2NavigationStartingEventHandler) uintptr {
++	return this.impl.Release()
++}
++
++func _ICoreWebView2NavigationStartingEventHandlerInvoke(this *ICoreWebView2NavigationStartingEventHandler, sender *ICoreWebView2, args *ICoreWebView2NavigationStartingEventArgs) uintptr {
++	return this.impl.NavigationStarting(sender, args)
++}
++
++type _ICoreWebView2NavigationStartingEventHandlerImpl interface {
++	_IUnknownImpl
++	NavigationStarting(sender *ICoreWebView2, args *ICoreWebView2NavigationStartingEventArgs) uintptr
++}
++
++var _ICoreWebView2NavigationStartingEventHandlerFn = _ICoreWebView2NavigationStartingEventHandlerVtbl{
++	_IUnknownVtbl{
++		NewComProc(_ICoreWebView2NavigationStartingEventHandlerIUnknownQueryInterface),
++		NewComProc(_ICoreWebView2NavigationStartingEventHandlerIUnknownAddRef),
++		NewComProc(_ICoreWebView2NavigationStartingEventHandlerIUnknownRelease),
++	},
++	NewComProc(_ICoreWebView2NavigationStartingEventHandlerInvoke),
++}
++
++func newICoreWebView2NavigationStartingEventHandler(impl _ICoreWebView2NavigationStartingEventHandlerImpl) *ICoreWebView2NavigationStartingEventHandler {
++	return &ICoreWebView2NavigationStartingEventHandler{
++		vtbl: &_ICoreWebView2NavigationStartingEventHandlerFn,
++		impl: impl,
++	}
++}
+diff -ruN a/go-webview2/pkg/edge/chromium.go b/go-webview2/pkg/edge/chromium.go
+--- a/go-webview2/pkg/edge/chromium.go
++++ b/go-webview2/pkg/edge/chromium.go
+@@ -27,6 +27,12 @@
+ 	webResourceRequested  *iCoreWebView2WebResourceRequestedEventHandler
+ 	acceleratorKeyPressed *ICoreWebView2AcceleratorKeyPressedEventHandler
+ 	navigationCompleted   *ICoreWebView2NavigationCompletedEventHandler
++	navigationStarting    *ICoreWebView2NavigationStartingEventHandler
++
++	// MODIFIED (third_party/NOTICE.md): navigation lock and start-up state.
++	allowNav       int32 // number of navigations the host has started itself and allows
++	abandoned      bool  // Embed gave up (window closed during start-up); late callbacks do nothing
++	QuitDuringInit bool  // the window was closed while WebView2 was still starting
+ 
+ 	environment *ICoreWebView2Environment
+ 
+@@ -64,6 +70,7 @@
+ 	e.webResourceRequested = newICoreWebView2WebResourceRequestedEventHandler(e)
+ 	e.acceleratorKeyPressed = newICoreWebView2AcceleratorKeyPressedEventHandler(e)
+ 	e.navigationCompleted = newICoreWebView2NavigationCompletedEventHandler(e)
++	e.navigationStarting = newICoreWebView2NavigationStartingEventHandler(e)
+ 	e.permissions = make(map[CoreWebView2PermissionKind]CoreWebView2PermissionState)
+ 
+ 	return e
+@@ -93,27 +100,36 @@
+ 		return false
+ 	}
+ 	var msg w32.Msg
+-	for {
+-		if atomic.LoadUintptr(&e.inited) != 0 {
+-			break
+-		}
++	for atomic.LoadUintptr(&e.inited) == 0 {
+ 		r, _, _ := w32.User32GetMessageW.Call(
+ 			uintptr(unsafe.Pointer(&msg)),
+ 			0,
+ 			0,
+ 			0,
+ 		)
+-		if r == 0 {
+-			break
++		if r == 0 || int32(r) == -1 {
++			// WM_QUIT (the window was closed while WebView2 was starting) or an
++			// error. MODIFIED: upstream carried on and dereferenced a nil webview.
++			e.QuitDuringInit = r == 0
++			e.abandoned = true
++			return false
+ 		}
+ 		_, _, _ = w32.User32TranslateMessage.Call(uintptr(unsafe.Pointer(&msg)))
+ 		_, _, _ = w32.User32DispatchMessageW.Call(uintptr(unsafe.Pointer(&msg)))
+ 	}
++	if e.webview == nil {
++		e.abandoned = true
++		return false
++	}
+ 	e.Init("window.external={invoke:s=>window.chrome.webview.postMessage(s)}")
+ 	return true
+ }
+ 
+ func (e *Chromium) Navigate(url string) {
++	if e.webview == nil {
++		return
++	}
++	atomic.AddInt32(&e.allowNav, 1)
+ 	_, _, _ = e.webview.vtbl.Navigate.Call(
+ 		uintptr(unsafe.Pointer(e.webview)),
+ 		uintptr(unsafe.Pointer(windows.StringToUTF16Ptr(url))),
+@@ -121,6 +137,10 @@
+ }
+ 
+ func (e *Chromium) NavigateToString(htmlContent string) {
++	if e.webview == nil {
++		return
++	}
++	atomic.AddInt32(&e.allowNav, 1)
+ 	_, _, _ = e.webview.vtbl.NavigateToString.Call(
+ 		uintptr(unsafe.Pointer(e.webview)),
+ 		uintptr(unsafe.Pointer(windows.StringToUTF16Ptr(htmlContent))),
+@@ -128,6 +148,9 @@
+ }
+ 
+ func (e *Chromium) Init(script string) {
++	if e.webview == nil {
++		return
++	}
+ 	_, _, _ = e.webview.vtbl.AddScriptToExecuteOnDocumentCreated.Call(
+ 		uintptr(unsafe.Pointer(e.webview)),
+ 		uintptr(unsafe.Pointer(windows.StringToUTF16Ptr(script))),
+@@ -136,9 +159,12 @@
+ }
+ 
+ func (e *Chromium) Eval(script string) {
++	if e.webview == nil {
++		return // closed or never started
++	}
+ 	_script, err := windows.UTF16PtrFromString(script)
+ 	if err != nil {
+-		log.Fatal(err)
++		return // a script with a NUL cannot be run; upstream exited the program here
+ 	}
+ 
+ 	_, _, _ = e.webview.vtbl.ExecuteScript.Call(
+@@ -149,10 +175,16 @@
+ }
+ 
+ func (e *Chromium) Show() error {
++	if e.controller == nil {
++		return nil
++	}
+ 	return e.controller.PutIsVisible(true)
+ }
+ 
+ func (e *Chromium) Hide() error {
++	if e.controller == nil {
++		return nil
++	}
+ 	return e.controller.PutIsVisible(false)
+ }
+ 
+@@ -169,8 +201,11 @@
+ }
+ 
+ func (e *Chromium) EnvironmentCompleted(res uintptr, env *ICoreWebView2Environment) uintptr {
+-	if int64(res) < 0 {
+-		log.Fatalf("Creating environment failed with %08x", res)
++	if e.abandoned {
++		return 0
++	}
++	if int32(res) < 0 {
++		fatalf("The browser component (WebView2) could not be started (error %08X).\n\nIt may be missing or damaged; try installing the Microsoft Edge WebView2 Runtime again.", uint32(res))
+ 	}
+ 	_, _, _ = env.vtbl.AddRef.Call(uintptr(unsafe.Pointer(env)))
+ 	e.environment = env
+@@ -184,8 +219,11 @@
+ }
+ 
+ func (e *Chromium) CreateCoreWebView2ControllerCompleted(res uintptr, controller *ICoreWebView2Controller) uintptr {
+-	if int64(res) < 0 {
+-		log.Fatalf("Creating controller failed with %08x", res)
++	if e.abandoned {
++		return 0
++	}
++	if int32(res) < 0 || controller == nil {
++		fatalf("The browser component (WebView2) could not create its window (error %08X).", uint32(res))
+ 	}
+ 	_, _, _ = controller.vtbl.AddRef.Call(uintptr(unsafe.Pointer(controller)))
+ 	e.controller = controller
+@@ -218,6 +256,11 @@
+ 		uintptr(unsafe.Pointer(e.navigationCompleted)),
+ 		uintptr(unsafe.Pointer(&token)),
+ 	)
++	_, _, _ = e.webview.vtbl.AddNavigationStarting.Call(
++		uintptr(unsafe.Pointer(e.webview)),
++		uintptr(unsafe.Pointer(e.navigationStarting)),
++		uintptr(unsafe.Pointer(&token)),
++	)
+ 
+ 	_ = e.controller.AddAcceleratorKeyPressed(e.acceleratorKeyPressed, &token)
+ 
+@@ -281,7 +324,7 @@
+ func (e *Chromium) WebResourceRequested(sender *ICoreWebView2, args *ICoreWebView2WebResourceRequestedEventArgs) uintptr {
+ 	req, err := args.GetRequest()
+ 	if err != nil {
+-		log.Fatal(err)
++		return 0
+ 	}
+ 	if e.WebResourceRequestedCallback != nil {
+ 		e.WebResourceRequestedCallback(req, args)
+@@ -292,7 +335,7 @@
+ func (e *Chromium) AddWebResourceRequestedFilter(filter string, ctx COREWEBVIEW2_WEB_RESOURCE_CONTEXT) {
+ 	err := e.webview.AddWebResourceRequestedFilter(filter, ctx)
+ 	if err != nil {
+-		log.Fatal(err)
++		fatalf("WebView2 refused a resource filter: %v", err)
+ 	}
+ }
+ 
+@@ -322,6 +365,9 @@
+ }
+ 
+ func (e *Chromium) GetSettings() (*ICoreWebViewSettings, error) {
++	if e.webview == nil {
++		return nil, windows.ERROR_INVALID_HANDLE
++	}
+ 	return e.webview.GetSettings()
+ }
+ 
+@@ -336,7 +382,25 @@
+ 	return 0
+ }
+ 
++// NavigationStarting allows only navigations the host started itself (the
++// initial page). Anything else, such as a file dropped on the window or a link,
++// is cancelled so the page and its bridge to the program can never be replaced.
++// MODIFIED: not in upstream.
++func (e *Chromium) NavigationStarting(sender *ICoreWebView2, args *ICoreWebView2NavigationStartingEventArgs) uintptr {
++	for {
++		n := atomic.LoadInt32(&e.allowNav)
++		if n <= 0 {
++			args.PutCancel(true)
++			return 0
++		}
++		if atomic.CompareAndSwapInt32(&e.allowNav, n, n-1) {
++			return 0
++		}
++	}
++}
++
+ func (e *Chromium) NavigationCompleted(sender *ICoreWebView2, args *ICoreWebView2NavigationCompletedEventArgs) uintptr {
++	atomic.StoreInt32(&e.allowNav, 0) // a navigation finished (or was cancelled): no credit is carried over
+ 	if e.NavigationCompletedCallback != nil {
+ 		e.NavigationCompletedCallback(sender, args)
+ 	}
+diff -ruN a/go-webview2/pkg/edge/fatal.go b/go-webview2/pkg/edge/fatal.go
+--- a/go-webview2/pkg/edge/fatal.go
++++ b/go-webview2/pkg/edge/fatal.go
+@@ -0,0 +1,27 @@
++//go:build windows
++
++package edge
++
++import (
++	"fmt"
++	"os"
++)
++
++// ErrorHandler is called with a plain message when WebView2 cannot start or
++// breaks (MODIFIED, see third_party/NOTICE.md: upstream called log.Fatalf, which
++// prints to a console that a GUI program does not have, so the program just
++// vanished). The handler should tell the user (a message box); the process
++// exits afterwards either way.
++var ErrorHandler func(msg string)
++
++// fatalf reports an unrecoverable error and exits, like log.Fatalf, but through ErrorHandler.
++func fatalf(format string, args ...interface{}) {
++	msg := fmt.Sprintf(format, args...)
++	if ErrorHandler != nil {
++		func() {
++			defer func() { _ = recover() }()
++			ErrorHandler(msg)
++		}()
++	}
++	os.Exit(1)
++}
+diff -ruN a/go-webview2/pkg/edge/hardening.go b/go-webview2/pkg/edge/hardening.go
+--- a/go-webview2/pkg/edge/hardening.go
++++ b/go-webview2/pkg/edge/hardening.go
+@@ -0,0 +1,122 @@
++//go:build windows
++
++package edge
++
++import "unsafe"
++
++// Interfaces that extend the ones upstream wraps. Each is reached with
++// QueryInterface; if the installed WebView2 Runtime does not offer it, the call
++// is skipped (the page has JavaScript fallbacks for every setting here).
++
++// IIDs from WebView2.idl.
++const (
++	iidSettings3   = "{fdb5ab74-af33-4854-84f0-0a631deb5eba}" // ICoreWebView2Settings3 (AreBrowserAcceleratorKeysEnabled)
++	iidController4 = "{97d418d5-a426-4e49-a151-e1a10f327d9e}" // ICoreWebView2Controller4 (AllowExternalDrop)
++	iidController2 = "{c979903e-d4ca-4228-92eb-47ee3fa96eab}" // ICoreWebView2Controller2 (DefaultBackgroundColor)
++)
++
++// _ICoreWebView2Controller4Vtbl lists every slot of the interface chain
++// Controller (23) + Controller2 (2) + Controller3 (8) + Controller4 (2) after IUnknown.
++type _ICoreWebView2Controller4Vtbl struct {
++	_IUnknownVtbl
++	// ICoreWebView2Controller
++	GetIsVisible                      ComProc
++	PutIsVisible                      ComProc
++	GetBounds                         ComProc
++	PutBounds                         ComProc
++	GetZoomFactor                     ComProc
++	PutZoomFactor                     ComProc
++	AddZoomFactorChanged              ComProc
++	RemoveZoomFactorChanged           ComProc
++	SetBoundsAndZoomFactor            ComProc
++	MoveFocus                         ComProc
++	AddMoveFocusRequested             ComProc
++	RemoveMoveFocusRequested          ComProc
++	AddGotFocus                       ComProc
++	RemoveGotFocus                    ComProc
++	AddLostFocus                      ComProc
++	RemoveLostFocus                   ComProc
++	AddAcceleratorKeyPressed          ComProc
++	RemoveAcceleratorKeyPressed       ComProc
++	GetParentWindow                   ComProc
++	PutParentWindow                   ComProc
++	NotifyParentWindowPositionChanged ComProc
++	Close                             ComProc
++	GetCoreWebView2                   ComProc
++	// ICoreWebView2Controller2
++	GetDefaultBackgroundColor ComProc
++	PutDefaultBackgroundColor ComProc
++	// ICoreWebView2Controller3
++	GetRasterizationScale              ComProc
++	PutRasterizationScale              ComProc
++	GetShouldDetectMonitorScaleChanges ComProc
++	PutShouldDetectMonitorScaleChanges ComProc
++	AddRasterizationScaleChanged       ComProc
++	RemoveRasterizationScaleChanged    ComProc
++	GetBoundsMode                      ComProc
++	PutBoundsMode                      ComProc
++	// ICoreWebView2Controller4
++	GetAllowExternalDrop ComProc
++	PutAllowExternalDrop ComProc
++}
++
++type iController4 struct {
++	vtbl *_ICoreWebView2Controller4Vtbl
++}
++
++// Compile-time layout check: IUnknown (3) + 23 + 2 + 8 + 2 = 38 slots; PutAllowExternalDrop is the last.
++var _ [38 * 8]byte = [unsafe.Sizeof(_ICoreWebView2Controller4Vtbl{})]byte{}
++
++// Harden applies the settings that keep the page a closed, single-purpose
++// surface: no zoom, no browser shortcuts (reload, find, print...), no external
++// file drop, no status bar, no dev tools or context menu unless debug. It is
++// best effort: a setting the runtime does not support is skipped.
++func (e *Chromium) Harden(debug bool) {
++	if e.webview == nil || e.controller == nil {
++		return
++	}
++	if s, err := e.webview.GetSettings(); err == nil && s != nil {
++		_ = s.PutIsZoomControlEnabled(false)
++		_ = s.PutIsStatusBarEnabled(false)
++		_ = s.PutAreDefaultContextMenusEnabled(debug)
++		_ = s.PutAreDevToolsEnabled(debug)
++		// AreBrowserAcceleratorKeysEnabled lives on ICoreWebView2Settings3.
++		var s3 *ICoreWebViewSettings
++		if hr, _, _ := s.vtbl.QueryInterface.Call(uintptr(unsafe.Pointer(s)), uintptr(unsafe.Pointer(NewGUID(iidSettings3))), uintptr(unsafe.Pointer(&s3))); hr == 0 && s3 != nil {
++			if !debug {
++				_ = s3.PutAreBrowserAcceleratorKeysEnabled(false)
++			}
++			_, _, _ = s3.vtbl.Release.Call(uintptr(unsafe.Pointer(s3)))
++		}
++	}
++	// Controller4: files dropped on the window must not navigate the page.
++	var c4 *iController4
++	if hr, _, _ := e.controller.vtbl.QueryInterface.Call(uintptr(unsafe.Pointer(e.controller)), uintptr(unsafe.Pointer(NewGUID(iidController4))), uintptr(unsafe.Pointer(&c4))); hr == 0 && c4 != nil {
++		_, _, _ = c4.vtbl.PutAllowExternalDrop.Call(uintptr(unsafe.Pointer(c4)), 0)
++		_, _, _ = c4.vtbl.Release.Call(uintptr(unsafe.Pointer(c4)))
++	}
++}
++
++// SetBackground sets the color shown before the page paints (avoids a white flash).
++func (e *Chromium) SetBackground(r, g, b uint8) {
++	if e.controller == nil {
++		return
++	}
++	if c2 := e.controller.GetICoreWebView2Controller2(); c2 != nil {
++		_ = c2.PutDefaultBackgroundColor(COREWEBVIEW2_COLOR{A: 255, R: r, G: g, B: b})
++		_, _, _ = c2.vtbl.Release.Call(uintptr(unsafe.Pointer(c2)))
++	}
++}
++
++// Close releases the controller, which lets the browser process shut down.
++func (e *Chromium) Close() {
++	if e.controller != nil {
++		_, _, _ = e.controller.vtbl.Close.Call(uintptr(unsafe.Pointer(e.controller)))
++		_, _, _ = e.controller.vtbl.Release.Call(uintptr(unsafe.Pointer(e.controller)))
++		e.controller = nil
++	}
++	if e.webview != nil {
++		_, _, _ = e.webview.vtbl.Release.Call(uintptr(unsafe.Pointer(e.webview)))
++		e.webview = nil
++	}
++}
+diff -ruN a/go-webview2/webview.go b/go-webview2/webview.go
+--- a/go-webview2/webview.go
++++ b/go-webview2/webview.go
+@@ -6,6 +6,7 @@
+ import (
+ 	"encoding/json"
+ 	"errors"
++	"fmt"
+ 	"log"
+ 	"reflect"
+ 	"strconv"
+@@ -60,11 +61,39 @@
+ 
+ type WindowOptions struct {
+ 	Title  string
+-	Width  uint
++	Width  uint // outer window size in pixels; clamped to the work area (MODIFIED)
+ 	Height uint
+ 	IconId uint
+ 	Center bool
+-}
++	// BackgroundRGB, if HasBackground, paints the window class and the browser
++	// surface before the page loads, so there is no white flash (MODIFIED).
++	HasBackground bool
++	BackgroundRGB [3]uint8
++}
++
++// StartupCancelled is true when NewWithOptions returned nil because the window
++// was closed while the browser was still starting; there is nothing to report
++// to the user then (MODIFIED).
++var StartupCancelled bool
++
++// ErrorHandler is told about errors that upstream treated as fatal. It should
++// show a message; the process exits afterwards. MODIFIED: see third_party/NOTICE.md.
++func SetErrorHandler(f func(msg string)) { edge.ErrorHandler = f }
++
++func fatalf(format string, args ...interface{}) {
++	msg := fmt.Sprintf(format, args...)
++	if edge.ErrorHandler != nil {
++		func() {
++			defer func() { _ = recover() }()
++			edge.ErrorHandler(msg)
++		}()
++	}
++	log.Fatal(msg)
++}
++
++// InternalErrorHandler, if set, hears about panics recovered in bound calls and
++// dispatched functions (for a log).
++var InternalErrorHandler func(msg string)
+ 
+ type WebViewOptions struct {
+ 	Window unsafe.Pointer
+@@ -102,27 +131,23 @@
+ 	chromium := edge.NewChromium()
+ 	chromium.MessageCallback = w.msgcb
+ 	chromium.DataPath = options.DataPath
+-	chromium.SetPermission(edge.CoreWebView2PermissionKindClipboardRead, edge.CoreWebView2PermissionStateAllow)
++	// MODIFIED: the page needs no browser permission (upstream allowed clipboard reading).
++	chromium.SetGlobalPermission(edge.CoreWebView2PermissionStateDeny)
+ 
+ 	w.browser = chromium
+ 	w.mainthread, _, _ = w32.Kernel32GetCurrentThreadID.Call()
++	StartupCancelled = false
+ 	if !w.CreateWithOptions(options.WindowOptions) {
++		StartupCancelled = chromium.QuitDuringInit
+ 		return nil
+ 	}
+ 
+-	settings, err := chromium.GetSettings()
+-	if err != nil {
+-		log.Fatal(err)
+-	}
+-	// disable context menu
+-	err = settings.PutAreDefaultContextMenusEnabled(options.Debug)
+-	if err != nil {
+-		log.Fatal(err)
+-	}
+-	// disable developer tools
+-	err = settings.PutAreDevToolsEnabled(options.Debug)
+-	if err != nil {
+-		log.Fatal(err)
++	// MODIFIED: context menu, dev tools, zoom, browser shortcuts and file drop
++	// are all switched off (unless Debug); failures here are not fatal.
++	chromium.Harden(options.Debug)
++	if options.WindowOptions.HasBackground {
++		c := options.WindowOptions.BackgroundRGB
++		chromium.SetBackground(c[0], c[1], c[2])
+ 	}
+ 
+ 	return w
+@@ -136,27 +161,48 @@
+ 
+ func jsString(v interface{}) string { b, _ := json.Marshal(v); return string(b) }
+ 
++// msgcb receives a call from the page. MODIFIED: it returns at once and the
++// bound function runs on its own goroutine, so file I/O never freezes the
++// window and a modal dialog never runs inside the browser's callback; the
++// answer goes back through Dispatch (the UI thread). A panic in the bound
++// function becomes a rejected promise instead of ending the program.
+ func (w *webview) msgcb(msg string) {
+ 	d := rpcMessage{}
+ 	if err := json.Unmarshal([]byte(msg), &d); err != nil {
+ 		log.Printf("invalid RPC message: %v", err)
+ 		return
+ 	}
++	go w.handleCall(d)
++}
+ 
++func (w *webview) handleCall(d rpcMessage) {
+ 	id := strconv.Itoa(d.ID)
+-	if res, err := w.callbinding(d); err != nil {
+-		w.Dispatch(func() {
+-			w.Eval("window._rpc[" + id + "].reject(" + jsString(err.Error()) + "); window._rpc[" + id + "] = undefined")
+-		})
+-	} else if b, err := json.Marshal(res); err != nil {
+-		w.Dispatch(func() {
+-			w.Eval("window._rpc[" + id + "].reject(" + jsString(err.Error()) + "); window._rpc[" + id + "] = undefined")
+-		})
+-	} else {
++	reject := func(text string) {
+ 		w.Dispatch(func() {
+-			w.Eval("window._rpc[" + id + "].resolve(" + string(b) + "); window._rpc[" + id + "] = undefined")
++			w.Eval("window._rpc[" + id + "].reject(" + jsString(text) + "); window._rpc[" + id + "] = undefined")
+ 		})
+ 	}
++	defer func() {
++		if p := recover(); p != nil {
++			if InternalErrorHandler != nil {
++				InternalErrorHandler(fmt.Sprintf("call %s: %v", d.Method, p))
++			}
++			reject("internal error")
++		}
++	}()
++	res, err := w.callbinding(d)
++	if err != nil {
++		reject(err.Error())
++		return
++	}
++	b, err := json.Marshal(res)
++	if err != nil {
++		reject(err.Error())
++		return
++	}
++	w.Dispatch(func() {
++		w.Eval("window._rpc[" + id + "].resolve(" + string(b) + "); window._rpc[" + id + "] = undefined")
++	})
+ }
+ 
+ func (w *webview) callbinding(d rpcMessage) (interface{}, error) {
+@@ -222,6 +268,14 @@
+ func wndproc(hwnd, msg, wp, lp uintptr) uintptr {
+ 	if w, ok := getWindowContext(hwnd).(*webview); ok {
+ 		switch msg {
++		case w32.WMApp:
++			w.drain()
++		case w32.WMDpiChanged:
++			// MODIFIED: move to the rectangle Windows suggests for the new monitor's DPI.
++			if r := (*w32.Rect)(unsafe.Pointer(lp)); r != nil {
++				_, _, _ = w32.User32SetWindowPos.Call(hwnd, 0, uintptr(r.Left), uintptr(r.Top),
++					uintptr(r.Right-r.Left), uintptr(r.Bottom-r.Top), w32.SWPNoZOrder|w32.SWPNoActivate)
++			}
+ 		case w32.WMMove, w32.WMMoving:
+ 			_ = w.browser.NotifyParentWindowPositionChanged()
+ 		case w32.WMNCLButtonDown:
+@@ -240,6 +294,9 @@
+ 		case w32.WMClose:
+ 			_, _, _ = w32.User32DestroyWindow.Call(hwnd)
+ 		case w32.WMDestroy:
++			if c, ok := w.browser.(interface{ Close() }); ok {
++				c.Close() // MODIFIED: release the controller so the browser process can exit
++			}
+ 			w.Terminate()
+ 		case w32.WMGetMinMaxInfo:
+ 			lpmmi := (*w32.MinMaxInfo)(unsafe.Pointer(lp))
+@@ -248,7 +305,12 @@
+ 				lpmmi.PtMaxTrackSize = w.maxsz
+ 			}
+ 			if w.minsz.X > 0 && w.minsz.Y > 0 {
++				// MODIFIED: never ask for a minimum size larger than the screen's work area.
+ 				lpmmi.PtMinTrackSize = w.minsz
++				if wa := workAreaFor(hwnd); wa.Right > wa.Left && wa.Bottom > wa.Top {
++					lpmmi.PtMinTrackSize.X = min32(lpmmi.PtMinTrackSize.X, wa.Right-wa.Left)
++					lpmmi.PtMinTrackSize.Y = min32(lpmmi.PtMinTrackSize.Y, wa.Bottom-wa.Top)
++				}
+ 			}
+ 		default:
+ 			r, _, _ := w32.User32DefWindowProcW.Call(hwnd, msg, wp, lp)
+@@ -266,19 +328,56 @@
+ 	return w.CreateWithOptions(WindowOptions{})
+ }
+ 
++func min32(a, b int32) int32 {
++	if a < b {
++		return a
++	}
++	return b
++}
++
++// workAreaFor returns the work area (screen minus taskbar) of the monitor the
++// window is on, or of the primary monitor when hwnd is 0. Zero Rect on failure.
++func workAreaFor(hwnd uintptr) (r w32.Rect) {
++	if hwnd != 0 {
++		mon, _, _ := w32.User32MonitorFromWindow.Call(hwnd, w32.MonitorDefaultToNearest)
++		if mon != 0 {
++			mi := w32.MonitorInfo{CbSize: uint32(unsafe.Sizeof(w32.MonitorInfo{}))}
++			if ok, _, _ := w32.User32GetMonitorInfoW.Call(mon, uintptr(unsafe.Pointer(&mi))); ok != 0 {
++				return mi.RcWork
++			}
++		}
++	}
++	if ok, _, _ := w32.User32SystemParametersInfoW.Call(w32.SPIGetWorkArea, 0, uintptr(unsafe.Pointer(&r)), 0); ok == 0 {
++		return w32.Rect{}
++	}
++	return r
++}
++
+ func (w *webview) CreateWithOptions(opts WindowOptions) bool {
+ 	var hinstance windows.Handle
+ 	_ = windows.GetModuleHandleEx(0, nil, &hinstance)
+ 
+-	var icon uintptr
+-	if opts.IconId == 0 {
+-		// load default icon
+-		icow, _, _ := w32.User32GetSystemMetrics.Call(w32.SystemMetricsCxIcon)
+-		icoh, _, _ := w32.User32GetSystemMetrics.Call(w32.SystemMetricsCyIcon)
+-		icon, _, _ = w32.User32LoadImageW.Call(uintptr(hinstance), 32512, icow, icoh, 0)
+-	} else {
+-		// load icon from resource
+-		icon, _, _ = w32.User32LoadImageW.Call(uintptr(hinstance), uintptr(opts.IconId), 1, 0, 0, w32.LR_DEFAULTSIZE|w32.LR_SHARED)
++	// Icons: the big one for the task switcher, the small one for the title bar.
++	// MODIFIED: sizes come from the system metrics instead of one LR_DEFAULTSIZE image.
++	loadIcon := func(cx, cy uintptr) uintptr {
++		if opts.IconId == 0 {
++			ico, _, _ := w32.User32LoadImageW.Call(uintptr(hinstance), 32512, cx, cy, 0) // IDI_APPLICATION
++			return ico
++		}
++		ico, _, _ := w32.User32LoadImageW.Call(uintptr(hinstance), uintptr(opts.IconId), 1, cx, cy, w32.LR_SHARED)
++		return ico
++	}
++	bigW, _, _ := w32.User32GetSystemMetrics.Call(w32.SystemMetricsCxIcon)
++	bigH, _, _ := w32.User32GetSystemMetrics.Call(w32.SystemMetricsCyIcon)
++	smW, _, _ := w32.User32GetSystemMetrics.Call(49) // SM_CXSMICON
++	smH, _, _ := w32.User32GetSystemMetrics.Call(50) // SM_CYSMICON
++	icon := loadIcon(bigW, bigH)
++	iconSm := loadIcon(smW, smH)
++
++	var brush uintptr
++	if opts.HasBackground {
++		c := opts.BackgroundRGB
++		brush, _, _ = w32.Gdi32CreateSolidBrush.Call(uintptr(uint32(c[0]) | uint32(c[1])<<8 | uint32(c[2])<<16)) // COLORREF 0x00BBGGRR
+ 	}
+ 
+ 	className, _ := windows.UTF16PtrFromString("webview")
+@@ -287,34 +386,34 @@
+ 		HInstance:     hinstance,
+ 		LpszClassName: className,
+ 		HIcon:         windows.Handle(icon),
+-		HIconSm:       windows.Handle(icon),
++		HIconSm:       windows.Handle(iconSm),
++		HbrBackground: windows.Handle(brush),
+ 		LpfnWndProc:   windows.NewCallback(wndproc),
+ 	}
+ 	_, _, _ = w32.User32RegisterClassExW.Call(uintptr(unsafe.Pointer(&wc)))
+ 
+ 	windowName, _ := windows.UTF16PtrFromString(opts.Title)
+ 
+-	windowWidth := opts.Width
+-	if windowWidth == 0 {
++	windowWidth := int32(opts.Width)
++	if windowWidth <= 0 {
+ 		windowWidth = 640
+ 	}
+-	windowHeight := opts.Height
+-	if windowHeight == 0 {
++	windowHeight := int32(opts.Height)
++	if windowHeight <= 0 {
+ 		windowHeight = 480
+ 	}
+ 
+-	var posX, posY uint
+-	if opts.Center {
+-		// get screen size
+-		screenWidth, _, _ := w32.User32GetSystemMetrics.Call(w32.SM_CXSCREEN)
+-		screenHeight, _, _ := w32.User32GetSystemMetrics.Call(w32.SM_CYSCREEN)
+-		// calculate window position
+-		posX = (uint(screenWidth) - windowWidth) / 2
+-		posY = (uint(screenHeight) - windowHeight) / 2
+-	} else {
+-		// use default position
+-		posX = w32.CW_USEDEFAULT
+-		posY = w32.CW_USEDEFAULT
++	// MODIFIED: signed arithmetic and a work-area clamp. Upstream computed the
++	// centred position with unsigned numbers, which wrapped to a huge value when
++	// the window was larger than the screen and put the title bar out of reach.
++	posX, posY := int32(-0x80000000), int32(-0x80000000) // CW_USEDEFAULT
++	if wa := workAreaFor(0); wa.Right > wa.Left && wa.Bottom > wa.Top {
++		windowWidth = min32(windowWidth, wa.Right-wa.Left)
++		windowHeight = min32(windowHeight, wa.Bottom-wa.Top)
++		if opts.Center {
++			posX = wa.Left + (wa.Right-wa.Left-windowWidth)/2
++			posY = wa.Top + (wa.Bottom-wa.Top-windowHeight)/2
++		}
+ 	}
+ 
+ 	w.hwnd, _, _ = w32.User32CreateWindowExW.Call(
+@@ -322,8 +421,8 @@
+ 		uintptr(unsafe.Pointer(className)),
+ 		uintptr(unsafe.Pointer(windowName)),
+ 		0xCF0000, // WS_OVERLAPPEDWINDOW
+-		uintptr(posX),
+-		uintptr(posY),
++		uintptr(uint32(posX)),
++		uintptr(uint32(posY)),
+ 		uintptr(windowWidth),
+ 		uintptr(windowHeight),
+ 		0,
+@@ -331,6 +430,9 @@
+ 		uintptr(hinstance),
+ 		0,
+ 	)
++	if w.hwnd == 0 {
++		return false
++	}
+ 	setWindowContext(w.hwnd, w)
+ 
+ 	_, _, _ = w32.User32ShowWindow.Call(w.hwnd, w32.SWShow)
+@@ -358,13 +460,7 @@
+ 			0,
+ 		)
+ 		if msg.Message == w32.WMApp {
+-			w.m.Lock()
+-			q := append([]func(){}, w.dispatchq...)
+-			w.dispatchq = []func(){}
+-			w.m.Unlock()
+-			for _, v := range q {
+-				v()
+-			}
++			w.drain()
+ 		} else if msg.Message == w32.WMQuit {
+ 			return
+ 		}
+@@ -378,6 +474,25 @@
+ 	}
+ }
+ 
++// drain runs the functions queued by Dispatch. MODIFIED: a panic in one of them
++// is recovered so the message loop survives.
++func (w *webview) drain() {
++	w.m.Lock()
++	q := append([]func(){}, w.dispatchq...)
++	w.dispatchq = []func(){}
++	w.m.Unlock()
++	for _, f := range q {
++		func() {
++			defer func() {
++				if p := recover(); p != nil && InternalErrorHandler != nil {
++					InternalErrorHandler(fmt.Sprintf("dispatched function: %v", p))
++				}
++			}()
++			f()
++		}()
++	}
++}
++
+ func (w *webview) Terminate() {
+ 	_, _, _ = w32.User32PostQuitMessage.Call(0)
+ }
+@@ -440,10 +555,18 @@
+ 	w.browser.Eval(js)
+ }
+ 
++// Dispatch runs f on the UI thread. MODIFIED: the wake-up message is posted to
++// the window instead of the thread. A thread message (hwnd NULL) is swallowed
++// by the nested message loop of a modal dialog and the queue then stalls until
++// the dialog closes; a window message is dispatched by every loop.
+ func (w *webview) Dispatch(f func()) {
+ 	w.m.Lock()
+ 	w.dispatchq = append(w.dispatchq, f)
+ 	w.m.Unlock()
++	if w.hwnd != 0 {
++		_, _, _ = w32.User32PostMessageW.Call(w.hwnd, w32.WMApp, 0, 0)
++		return
++	}
+ 	_, _, _ = w32.User32PostThreadMessageW.Call(w.mainthread, w32.WMApp, 0, 0)
+ }
+ 
+diff -ruN a/go-webview2/webviewloader/module.go b/go-webview2/webviewloader/module.go
+--- a/go-webview2/webviewloader/module.go
++++ b/go-webview2/webviewloader/module.go
+@@ -1,6 +1,15 @@
+ package webviewloader
+ 
++// MODIFIED for the F.E.A.R. Console Restoration installer (see third_party/NOTICE.md):
++// upstream first tried LoadLibrary("WebView2Loader") with the default DLL search
++// order (which includes the application and current folders) and fell back to the
++// embedded copy. That lets a planted WebView2Loader.dll next to the .exe, or in
++// the current folder, run instead. This version never touches the disk: the
++// embedded, hash-pinned loader is always the one used.
++
+ import (
++	"crypto/sha256"
++	"encoding/hex"
+ 	"fmt"
+ 	"sync"
+ 	"unsafe"
+@@ -9,12 +18,11 @@
+ 	"golang.org/x/sys/windows"
+ )
+ 
+-var (
+-	nativeModule                                       = windows.NewLazyDLL("WebView2Loader")
+-	nativeCreate                                       = nativeModule.NewProc("CreateCoreWebView2EnvironmentWithOptions")
+-	nativeCompareBrowserVersions                       = nativeModule.NewProc("CompareBrowserVersions")
+-	nativeGetAvailableCoreWebView2BrowserVersionString = nativeModule.NewProc("GetAvailableCoreWebView2BrowserVersionString")
++// EmbeddedLoaderSHA256 is the SHA-256 of the embedded x64 WebView2Loader.dll
++// (Microsoft WebView2 SDK, BSD 3-Clause). It is checked before the DLL is mapped.
++const EmbeddedLoaderSHA256 = "c4674acf95f0800793a4a6d61132adf5dfa694c218e482d86093494c4e84100a"
+ 
++var (
+ 	memOnce                                         sync.Once
+ 	memModule                                       winloader.Module
+ 	memCreate                                       winloader.Proc
+@@ -23,13 +31,33 @@
+ 	memErr                                          error
+ )
+ 
++func loadFromMemory() error {
++	memOnce.Do(func() {
++		if sum := sha256.Sum256(WebView2Loader); hex.EncodeToString(sum[:]) != EmbeddedLoaderSHA256 {
++			memErr = fmt.Errorf("embedded WebView2Loader.dll does not match its expected checksum")
++			return
++		}
++		memModule, memErr = winloader.LoadFromMemory(WebView2Loader)
++		if memErr != nil {
++			memErr = fmt.Errorf("unable to load the embedded WebView2Loader.dll: %w", memErr)
++			return
++		}
++		memCreate = memModule.Proc("CreateCoreWebView2EnvironmentWithOptions")
++		memCompareBrowserVersions = memModule.Proc("CompareBrowserVersions")
++		memGetAvailableCoreWebView2BrowserVersionString = memModule.Proc("GetAvailableCoreWebView2BrowserVersionString")
++		if memCreate == nil || memCompareBrowserVersions == nil || memGetAvailableCoreWebView2BrowserVersionString == nil {
++			memErr = fmt.Errorf("the embedded WebView2Loader.dll lacks an expected export")
++		}
++	})
++	return memErr
++}
++
+ // CompareBrowserVersions will compare the 2 given versions and return:
+ //
+ //	-1 = v1 < v2
+ //	 0 = v1 == v2
+ //	 1 = v1 > v2
+ func CompareBrowserVersions(v1 string, v2 string) (int, error) {
+-
+ 	_v1, err := windows.UTF16PtrFromString(v1)
+ 	if err != nil {
+ 		return 0, err
+@@ -38,27 +66,14 @@
+ 	if err != nil {
+ 		return 0, err
+ 	}
+-
+-	nativeErr := nativeModule.Load()
+-	if nativeErr == nil {
+-		nativeErr = nativeCompareBrowserVersions.Find()
++	if err := loadFromMemory(); err != nil {
++		return 0, err
+ 	}
+ 	var result int
+-	if nativeErr != nil {
+-		err = loadFromMemory(nativeErr)
+-		if err != nil {
+-			return 0, fmt.Errorf("Unable to load WebView2Loader.dll from disk: %v -- or from memory: %w", nativeErr, memErr)
+-		}
+-		_, _, err = memCompareBrowserVersions.Call(
+-			uint64(uintptr(unsafe.Pointer(_v1))),
+-			uint64(uintptr(unsafe.Pointer(_v2))),
+-			uint64(uintptr(unsafe.Pointer(&result))))
+-	} else {
+-		_, _, err = nativeCompareBrowserVersions.Call(
+-			uintptr(unsafe.Pointer(_v1)),
+-			uintptr(unsafe.Pointer(_v2)),
+-			uintptr(unsafe.Pointer(&result)))
+-	}
++	_, _, err = memCompareBrowserVersions.Call(
++		uint64(uintptr(unsafe.Pointer(_v1))),
++		uint64(uintptr(unsafe.Pointer(_v2))),
++		uint64(uintptr(unsafe.Pointer(&result))))
+ 	if err != windows.ERROR_SUCCESS {
+ 		return result, err
+ 	}
+@@ -68,86 +83,37 @@
+ // GetInstalledVersion returns the installed version of the webview2 runtime.
+ // If there is no version installed, a blank string is returned.
+ func GetInstalledVersion() (string, error) {
+-	// GetAvailableCoreWebView2BrowserVersionString is documented as:
+-	//	public STDAPI GetAvailableCoreWebView2BrowserVersionString(PCWSTR browserExecutableFolder, LPWSTR * versionInfo)
+-	// where winnt.h defines STDAPI as:
+-	//	EXTERN_C HRESULT STDAPICALLTYPE
+-	// the first part (EXTERN_C) can be ignored since it's only relevent to C++,
+-	// HRESULT is return type which means it returns an integer that will be 0 (S_OK) on success,
+-	// and finally STDAPICALLTYPE tells us the function uses the stdcall calling convention (what Go assumes for syscalls).
+-
+-	nativeErr := nativeModule.Load()
+-	if nativeErr == nil {
+-		nativeErr = nativeGetAvailableCoreWebView2BrowserVersionString.Find()
++	// GetAvailableCoreWebView2BrowserVersionString(PCWSTR browserExecutableFolder, LPWSTR *versionInfo)
++	// returns an HRESULT (a 32-bit value, even on 64-bit systems).
++	if err := loadFromMemory(); err != nil {
++		return "", err
+ 	}
+-	var hr uintptr
+ 	var result *uint16
+-	if nativeErr != nil {
+-		if err := loadFromMemory(nativeErr); err != nil {
+-			return "", fmt.Errorf("Unable to load WebView2Loader.dll from disk: %v -- or from memory: %w", nativeErr, memErr)
+-		}
+-		hr64, _, _ := memGetAvailableCoreWebView2BrowserVersionString.Call(
+-			uint64(uintptr(unsafe.Pointer(nil))),
+-			uint64(uintptr(unsafe.Pointer(&result))))
+-		hr = uintptr(hr64) // The return size of the HRESULT will be whatver native size is (i.e uintptr) and not 64-bits on 32-bit systems.  In both cases it should be interpreted as 32-bits (a LONG).
+-	} else {
+-		hr, _, _ = nativeGetAvailableCoreWebView2BrowserVersionString.Call(
+-			uintptr(unsafe.Pointer(nil)),
+-			uintptr(unsafe.Pointer(&result)))
+-	}
++	hr64, _, _ := memGetAvailableCoreWebView2BrowserVersionString.Call(
++		uint64(uintptr(unsafe.Pointer(nil))),
++		uint64(uintptr(unsafe.Pointer(&result))))
++	hr := uintptr(hr64)
+ 	defer windows.CoTaskMemFree(unsafe.Pointer(result)) // Safe even if result is nil
+ 	if hr != uintptr(windows.S_OK) {
+ 		if hr&0xFFFF == uintptr(windows.ERROR_FILE_NOT_FOUND) {
+-			// The lower 16-bits (the error code itself) of the HRESULT is ERROR_FILE_NOT_FOUND which means the system isn't installed.
+-			return "", nil // Return a blank string but no error since we successfully detected no install.
++			// The runtime is not installed: a blank string, not an error.
++			return "", nil
+ 		}
+ 		return "", fmt.Errorf("GetAvailableCoreWebView2BrowserVersionString returned HRESULT 0x%X", hr)
+ 	}
+-	version := windows.UTF16PtrToString(result) // Safe even if result is nil
+-	return version, nil
++	return windows.UTF16PtrToString(result), nil
+ }
+ 
+-// CreateCoreWebView2EnvironmentWithOptions tries to load WebviewLoader2 and
+-// call the CreateCoreWebView2EnvironmentWithOptions routine.
++// CreateCoreWebView2EnvironmentWithOptions calls the loader's routine of the same name.
+ func CreateCoreWebView2EnvironmentWithOptions(browserExecutableFolder, userDataFolder *uint16, environmentOptions uintptr, environmentCompletedHandle uintptr) (uintptr, error) {
+-	nativeErr := nativeModule.Load()
+-	if nativeErr == nil {
+-		nativeErr = nativeCreate.Find()
+-	}
+-	if nativeErr != nil {
+-		err := loadFromMemory(nativeErr)
+-		if err != nil {
+-			return 0, err
+-		}
+-		res, _, _ := memCreate.Call(
+-			uint64(uintptr(unsafe.Pointer(browserExecutableFolder))),
+-			uint64(uintptr(unsafe.Pointer(userDataFolder))),
+-			uint64(environmentOptions),
+-			uint64(environmentCompletedHandle),
+-		)
+-		return uintptr(res), nil
+-	}
+-	res, _, _ := nativeCreate.Call(
+-		uintptr(unsafe.Pointer(browserExecutableFolder)),
+-		uintptr(unsafe.Pointer(userDataFolder)),
+-		environmentOptions,
+-		environmentCompletedHandle,
++	if err := loadFromMemory(); err != nil {
++		return 0, err
++	}
++	res, _, _ := memCreate.Call(
++		uint64(uintptr(unsafe.Pointer(browserExecutableFolder))),
++		uint64(uintptr(unsafe.Pointer(userDataFolder))),
++		uint64(environmentOptions),
++		uint64(environmentCompletedHandle),
+ 	)
+-	return res, nil
+-}
+-
+-func loadFromMemory(nativeErr error) error {
+-	var err error
+-	// DLL is not available natively. Try loading embedded copy.
+-	memOnce.Do(func() {
+-		memModule, memErr = winloader.LoadFromMemory(WebView2Loader)
+-		if memErr != nil {
+-			err = fmt.Errorf("Unable to load WebView2Loader.dll from disk: %v -- or from memory: %w", nativeErr, memErr)
+-			return
+-		}
+-		memCreate = memModule.Proc("CreateCoreWebView2EnvironmentWithOptions")
+-		memCompareBrowserVersions = memModule.Proc("CompareBrowserVersions")
+-		memGetAvailableCoreWebView2BrowserVersionString = memModule.Proc("GetAvailableCoreWebView2BrowserVersionString")
+-	})
+-	return err
++	return uintptr(res), nil
+ }

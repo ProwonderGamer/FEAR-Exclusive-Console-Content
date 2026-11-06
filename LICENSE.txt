@@ -1,0 +1,72 @@
+F.E.A.R. Exclusive Console Content - License
+
+Copyright (c) 2026 F.E.A.R. Exclusive Console Content contributors
+
+In short: free to use, never for sale, and not to be re-uploaded as is. To share the mod, link
+to its original download page.
+
+You may:
+- download, install and use the mod for free, and show it in videos and streams;
+- share a modified version of the mod, as long as:
+  - it is free of charge;
+  - you credit "F.E.A.R. Exclusive Console Content" and link to its original
+    download page;
+  - you include this license, so the same terms apply to your version.
+- build the installer yourself from its source code for your own use, and fork its source
+  code repository to work on it;
+- reuse parts of the installer's source code in your own project, as long as:
+  - it is free of charge;
+  - you credit "F.E.A.R. Exclusive Console Content" and link to its original
+    download page;
+  - you include this license, so the same terms apply to the parts you reuse.
+
+You may not:
+- sell the mod, a modified version or any part of it, or ask for payment or anything else in
+  return for it. This includes putting it behind a paywall, a subscription or a required
+  donation, and bundling it with anything that is sold;
+- redistribute the mod as is: do not re-upload or host the original files anywhere (the release
+  package or any file from it), including in mod packs and collections. A copy with only minor
+  changes, such as renamed files or a different settings file, still counts as the mod as is.
+
+THE MOD IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+CONNECTION WITH THE MOD OR THE USE OR OTHER DEALINGS IN THE MOD.
+
+
+What this license covers
+
+"The mod" in this license is the original work in F.E.A.R. Exclusive Console Content: its
+program FEAR-Exclusive-Console-Content-Installer.exe and the installer's source code; the
+game add-on that program installs as dinput8_hook.dll in the game folder, and the install
+record it writes there as FEAR_ConsoleRestoration\CR_install.json; and its read-me files.
+The game add-on is published as a program only, without its source code. It is shipped with
+every value that comes from the game left blank, and the installer fills those values in
+from the player's own copies of the game when it installs the add-on.
+
+The installer shows F.E.A.R. artwork (its background picture and its icon), which remains
+the property of Warner Bros. Entertainment Inc., and the PlayStation 3 and Xbox 360 logos,
+which remain the property of Sony Interactive Entertainment Inc. and Microsoft Corporation.
+They are not covered by this license.
+
+Parts of the installer come from other authors and keep their own licenses; their notices
+are in Go-LICENSE.txt, Go-PATENTS.txt, go-webview2-LICENSE.txt, go-ole-LICENSE.txt,
+go-winloader-LICENSE.txt, WebView2-SDK-LICENSE.txt, FFmpeg-LICENSE.txt,
+FreeType-LICENSE.txt and Pillow-LICENSE.txt, included with it. The sound decoders derived
+from FFmpeg are licensed under the GNU Lesser General Public License, version 2.1 or later,
+not under this license, and nothing in this license limits what that license allows. In
+particular, you may modify the installer for your own use and reverse engineer it to debug
+such modifications.
+
+The download contains no files from the game. Everything else the program puts in the
+FEAR_ConsoleRestoration folder is made on the player's own computer from the player's own
+copies of F.E.A.R. (PC, PlayStation 3 and Xbox 360). Those files are not covered by this
+license and remain the property of Warner Bros. Entertainment Inc.
+
+This is an unofficial fan-made fix, not affiliated with or endorsed by Warner Bros., Sony
+Interactive Entertainment or Microsoft.
+F.E.A.R. and Monolith are trademarks of Warner Bros. Entertainment Inc. PlayStation is a
+trademark of Sony Interactive Entertainment Inc. Xbox 360 is a trademark of Microsoft
+Corporation.

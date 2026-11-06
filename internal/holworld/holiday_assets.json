@@ -1,0 +1,445 @@
+{
+ "note": "PC paths of the X360 content the Holiday port adds (tree build) or replaces under a stock name (optional_x360_diff), including 34 optional_x360_diff entries for PC files whose precache name the confirmed world writes in its own letter case, and 2 build entries for precache names that are not in the PC archive table of contents. Only name resolution uses this file.",
+ "files": [
+  {
+   "pc_path": "AnimationDatabase\\AnimTrees\\Soldier_Holiday.AnmTree00p",
+   "tree": "build",
+   "in_installed_assetlist": false
+  },
+  {
+   "pc_path": "AnimationDatabase\\AnimTrees\\Soldier_Holiday2.AnmTree00p",
+   "tree": "build",
+   "in_installed_assetlist": false
+  },
+  {
+   "pc_path": "Interface\\hud\\weapon\\dualsm15.dds",
+   "tree": "build",
+   "in_installed_assetlist": true
+  },
+  {
+   "pc_path": "Interface\\hud\\weapon\\dualsm15X.dds",
+   "tree": "build",
+   "in_installed_assetlist": true
+  },
+  {
+   "pc_path": "Interface\\hud\\weapon\\sm15.dds",
+   "tree": "build",
+   "in_installed_assetlist": true
+  },
+  {
+   "pc_path": "Interface\\hud\\weapon\\sm15x.dds",
+   "tree": "build",
+   "in_installed_assetlist": true
+  },
+  {
+   "pc_path": "Materials\\Grid_Floor_D.dds",
+   "tree": "build",
+   "in_installed_assetlist": true
+  },
+  {
+   "pc_path": "Materials\\Engineering\\black.dds",
+   "tree": "build",
+   "in_installed_assetlist": true
+  },
+  {
+   "pc_path": "Materials\\grid\\grid_e.dds",
+   "tree": "build",
+   "in_installed_assetlist": true
+  },
+  {
+   "pc_path": "Materials\\grid\\grid_n.dds",
+   "tree": "build",
+   "in_installed_assetlist": true
+  },
+  {
+   "pc_path": "Materials\\grid\\grid_s.dds",
+   "tree": "build",
+   "in_installed_assetlist": true
+  },
+  {
+   "pc_path": "Tex\\Localization\\Calibration_A0.dds",
+   "tree": "build",
+   "in_installed_assetlist": true
+  },
+  {
+   "pc_path": "chars\\models\\Base_BishopEvac_BishopSitting.Model00p",
+   "tree": "build",
+   "in_installed_assetlist": true
+  },
+  {
+   "pc_path": "chars\\models\\IanHives_Holiday.Model00p",
+   "tree": "build",
+   "in_installed_assetlist": false
+  },
+  {
+   "pc_path": "chars\\models\\player_SM15.Model00p",
+   "tree": "build",
+   "in_installed_assetlist": true
+  },
+  {
+   "pc_path": "chars\\models\\player_dualSM15.Model00p",
+   "tree": "build",
+   "in_installed_assetlist": true
+  },
+  {
+   "pc_path": "chars\\models\\player_holiday.Model00p",
+   "tree": "build",
+   "in_installed_assetlist": true
+  },
+  {
+   "pc_path": "guns\\Materials\\SM15_Machine_Pistol.Mat00",
+   "tree": "build",
+   "in_installed_assetlist": true
+  },
+  {
+   "pc_path": "guns\\models_hh\\SM15_Left.Model00p",
+   "tree": "build",
+   "in_installed_assetlist": true
+  },
+  {
+   "pc_path": "guns\\models_hh\\SM15_Right.Model00p",
+   "tree": "build",
+   "in_installed_assetlist": true
+  },
+  {
+   "pc_path": "guns\\models_hh\\SM15machinePistol.Model00p",
+   "tree": "build",
+   "in_installed_assetlist": true
+  },
+  {
+   "pc_path": "guns\\skins_pv\\SM15_Machine_Pistol_D.dds",
+   "tree": "build",
+   "in_installed_assetlist": true
+  },
+  {
+   "pc_path": "guns\\skins_pv\\SM15_Machine_Pistol_N.dds",
+   "tree": "build",
+   "in_installed_assetlist": true
+  },
+  {
+   "pc_path": "guns\\skins_pv\\SM15_Machine_Pistol_S.dds",
+   "tree": "build",
+   "in_installed_assetlist": true
+  },
+  {
+   "pc_path": "voice\\B1001.wav",
+   "tree": "build",
+   "in_installed_assetlist": false
+  },
+  {
+   "pc_path": "voice\\B1002.wav",
+   "tree": "build",
+   "in_installed_assetlist": false
+  },
+  {
+   "pc_path": "voice\\B1002r.wav",
+   "tree": "build",
+   "in_installed_assetlist": false
+  },
+  {
+   "pc_path": "voice\\B1003.wav",
+   "tree": "build",
+   "in_installed_assetlist": false
+  },
+  {
+   "pc_path": "voice\\B1003r.wav",
+   "tree": "build",
+   "in_installed_assetlist": false
+  },
+  {
+   "pc_path": "voice\\B1004.wav",
+   "tree": "build",
+   "in_installed_assetlist": false
+  },
+  {
+   "pc_path": "voice\\B1004r.wav",
+   "tree": "build",
+   "in_installed_assetlist": false
+  },
+  {
+   "pc_path": "voice\\B1005.wav",
+   "tree": "build",
+   "in_installed_assetlist": false
+  },
+  {
+   "pc_path": "voice\\B1006.wav",
+   "tree": "build",
+   "in_installed_assetlist": false
+  },
+  {
+   "pc_path": "voice\\B1006r.wav",
+   "tree": "build",
+   "in_installed_assetlist": false
+  },
+  {
+   "pc_path": "voice\\B1007.wav",
+   "tree": "build",
+   "in_installed_assetlist": false
+  },
+  {
+   "pc_path": "voice\\B1007r.wav",
+   "tree": "build",
+   "in_installed_assetlist": false
+  },
+  {
+   "pc_path": "voice\\B1020.wav",
+   "tree": "build",
+   "in_installed_assetlist": false
+  },
+  {
+   "pc_path": "voice\\B1020r.wav",
+   "tree": "build",
+   "in_installed_assetlist": false
+  },
+  {
+   "pc_path": "voice\\B1021.wav",
+   "tree": "build",
+   "in_installed_assetlist": false
+  },
+  {
+   "pc_path": "voice\\B1021r.wav",
+   "tree": "build",
+   "in_installed_assetlist": false
+  },
+  {
+   "pc_path": "voice\\B1022.wav",
+   "tree": "build",
+   "in_installed_assetlist": false
+  },
+  {
+   "pc_path": "voice\\B1022r.wav",
+   "tree": "build",
+   "in_installed_assetlist": false
+  },
+  {
+   "pc_path": "voice\\B1030.wav",
+   "tree": "build",
+   "in_installed_assetlist": false
+  },
+  {
+   "pc_path": "voice\\B1030r.wav",
+   "tree": "build",
+   "in_installed_assetlist": false
+  },
+  {
+   "pc_path": "voice\\B1031.wav",
+   "tree": "build",
+   "in_installed_assetlist": false
+  },
+  {
+   "pc_path": "voice\\B1031r.wav",
+   "tree": "build",
+   "in_installed_assetlist": false
+  },
+  {
+   "pc_path": "voice\\B1032.wav",
+   "tree": "build",
+   "in_installed_assetlist": false
+  },
+  {
+   "pc_path": "voice\\B1032r.wav",
+   "tree": "build",
+   "in_installed_assetlist": false
+  },
+  {
+   "pc_path": "voice\\B1033.wav",
+   "tree": "build",
+   "in_installed_assetlist": false
+  },
+  {
+   "pc_path": "voice\\B1033r.wav",
+   "tree": "build",
+   "in_installed_assetlist": false
+  },
+  {
+   "pc_path": "voice\\B1036.wav",
+   "tree": "build",
+   "in_installed_assetlist": false
+  },
+  {
+   "pc_path": "voice\\B1037.wav",
+   "tree": "build",
+   "in_installed_assetlist": false
+  },
+  {
+   "pc_path": "Prefabs\\Industrial\\Wallbox01_N.dds",
+   "tree": "optional_x360_diff",
+   "in_installed_assetlist": true
+  },
+  {
+   "pc_path": "chars\\models\\player_watson.Model00p",
+   "tree": "build",
+   "in_installed_assetlist": true
+  },
+  {
+   "pc_path": "Tex\\Office\\Painting01_D.dds",
+   "tree": "optional_x360_diff",
+   "in_installed_assetlist": true
+  },
+  {
+   "pc_path": "Materials\\Tech\\MetalTrim05_S.dds",
+   "tree": "optional_x360_diff",
+   "in_installed_assetlist": true
+  },
+  {
+   "pc_path": "Prefabs\\Office\\FireExtinguisher_S.dds",
+   "tree": "optional_x360_diff",
+   "in_installed_assetlist": true
+  },
+  {
+   "pc_path": "Materials\\Tech\\MetalWall02_S.dds",
+   "tree": "optional_x360_diff",
+   "in_installed_assetlist": true
+  },
+  {
+   "pc_path": "Prefabs\\Industrial\\Fan01_S.dds",
+   "tree": "optional_x360_diff",
+   "in_installed_assetlist": true
+  },
+  {
+   "pc_path": "Prefabs\\Office\\FireExtinguisherBox_S.dds",
+   "tree": "optional_x360_diff",
+   "in_installed_assetlist": true
+  },
+  {
+   "pc_path": "Tex\\Industrial\\Cement001_N.dds",
+   "tree": "optional_x360_diff",
+   "in_installed_assetlist": true
+  },
+  {
+   "pc_path": "Materials\\Tech\\MetalTrim03_D.dds",
+   "tree": "optional_x360_diff",
+   "in_installed_assetlist": true
+  },
+  {
+   "pc_path": "Tex\\Office\\Painting02_D.dds",
+   "tree": "optional_x360_diff",
+   "in_installed_assetlist": true
+  },
+  {
+   "pc_path": "Prefabs\\Office\\Mug01_D.dds",
+   "tree": "optional_x360_diff",
+   "in_installed_assetlist": true
+  },
+  {
+   "pc_path": "Materials\\Tech\\MetalTrim03_N.dds",
+   "tree": "optional_x360_diff",
+   "in_installed_assetlist": true
+  },
+  {
+   "pc_path": "Prefabs\\Office\\Mug01_N.dds",
+   "tree": "optional_x360_diff",
+   "in_installed_assetlist": true
+  },
+  {
+   "pc_path": "Tex\\Office\\Painting03_D.dds",
+   "tree": "optional_x360_diff",
+   "in_installed_assetlist": true
+  },
+  {
+   "pc_path": "Tex\\Office\\Painting00_D.dds",
+   "tree": "optional_x360_diff",
+   "in_installed_assetlist": true
+  },
+  {
+   "pc_path": "interface\\menu\\sprtex\\slider.dds",
+   "tree": "optional_x360_diff",
+   "in_installed_assetlist": true
+  },
+  {
+   "pc_path": "Prefabs\\Industrial\\Wallbox04_N.dds",
+   "tree": "optional_x360_diff",
+   "in_installed_assetlist": true
+  },
+  {
+   "pc_path": "Prefabs\\Industrial\\Wallbox04_S.dds",
+   "tree": "optional_x360_diff",
+   "in_installed_assetlist": true
+  },
+  {
+   "pc_path": "attachments\\skins\\medkit_N.dds",
+   "tree": "optional_x360_diff",
+   "in_installed_assetlist": true
+  },
+  {
+   "pc_path": "Materials\\Tech\\MetalTrim05_D.dds",
+   "tree": "optional_x360_diff",
+   "in_installed_assetlist": true
+  },
+  {
+   "pc_path": "Materials\\Tech\\MetalWall02_D.dds",
+   "tree": "optional_x360_diff",
+   "in_installed_assetlist": true
+  },
+  {
+   "pc_path": "Prefabs\\Industrial\\Fan01_D.dds",
+   "tree": "optional_x360_diff",
+   "in_installed_assetlist": true
+  },
+  {
+   "pc_path": "Prefabs\\Industrial\\Wallbox01_S.dds",
+   "tree": "optional_x360_diff",
+   "in_installed_assetlist": true
+  },
+  {
+   "pc_path": "Materials\\Tech\\MetalTrim05_N.dds",
+   "tree": "optional_x360_diff",
+   "in_installed_assetlist": true
+  },
+  {
+   "pc_path": "Prefabs\\Office\\FireExtinguisher_N.dds",
+   "tree": "optional_x360_diff",
+   "in_installed_assetlist": true
+  },
+  {
+   "pc_path": "Materials\\Tech\\MetalWall02_N.dds",
+   "tree": "optional_x360_diff",
+   "in_installed_assetlist": true
+  },
+  {
+   "pc_path": "Tex\\Industrial\\Metal002_S.dds",
+   "tree": "optional_x360_diff",
+   "in_installed_assetlist": true
+  },
+  {
+   "pc_path": "Prefabs\\Office\\FireExtinguisherBox_N.dds",
+   "tree": "optional_x360_diff",
+   "in_installed_assetlist": true
+  },
+  {
+   "pc_path": "engine\\NotifierUsedMemoryPercent.dds",
+   "tree": "build",
+   "in_installed_assetlist": true
+  },
+  {
+   "pc_path": "Prefabs\\Industrial\\Wallbox01_E.dds",
+   "tree": "optional_x360_diff",
+   "in_installed_assetlist": true
+  },
+  {
+   "pc_path": "Tex\\Industrial\\Cement001_S.dds",
+   "tree": "optional_x360_diff",
+   "in_installed_assetlist": true
+  },
+  {
+   "pc_path": "chars\\skins\\IanHives_N.dds",
+   "tree": "optional_x360_diff",
+   "in_installed_assetlist": true
+  },
+  {
+   "pc_path": "Materials\\Tech\\MetalTrim03_S.dds",
+   "tree": "optional_x360_diff",
+   "in_installed_assetlist": true
+  },
+  {
+   "pc_path": "chars\\skins\\MaleBystander_N.dds",
+   "tree": "optional_x360_diff",
+   "in_installed_assetlist": true
+  },
+  {
+   "pc_path": "Prefabs\\Office\\Mug01_S.dds",
+   "tree": "optional_x360_diff",
+   "in_installed_assetlist": true
+  }
+ ]
+}

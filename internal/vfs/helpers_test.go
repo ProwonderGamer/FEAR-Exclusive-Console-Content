@@ -1,0 +1,5 @@
+package vfs_test
+
+import "os"
+
+func writeFile(p string, b []byte) error { return os.WriteFile(p, b, 0o644) }

@@ -1,0 +1,115 @@
+{
+ "note": "The complete set of 11 object value edits the Holiday recipe applies after converting the X360 Holiday.wldsrvr; every other difference from the console world is made by converter rules. Old values are the raw X360 values. Names and command strings only.",
+ "patches": [
+  {
+   "id": "P01",
+   "class": "GameStartPoint",
+   "object": "GameStartPoint00",
+   "property": "ModelTemplate",
+   "old": "Player_Holiday",
+   "new": "zSFODD_Player_Holiday",
+   "reason": "Player_Holiday exists only in the X360 DB; merged DB has zSFODD_Player_Holiday.",
+   "priority": "required"
+  },
+  {
+   "id": "P02",
+   "class": "CAI",
+   "object": "FirstAI_01",
+   "property": "Weapon0",
+   "old": "Machine Pistol",
+   "new": "zSFODD_Machine Pistol",
+   "reason": "SM15 record is zSFODD_Machine Pistol on PC.",
+   "priority": "required"
+  },
+  {
+   "id": "P02",
+   "class": "CAI",
+   "object": "FirstAI_02",
+   "property": "Weapon0",
+   "old": "Machine Pistol",
+   "new": "zSFODD_Machine Pistol",
+   "reason": "SM15 record is zSFODD_Machine Pistol on PC.",
+   "priority": "required"
+  },
+  {
+   "id": "P02",
+   "class": "CAI",
+   "object": "FourthAI_01",
+   "property": "Weapon0",
+   "old": "Machine Pistol",
+   "new": "zSFODD_Machine Pistol",
+   "reason": "SM15 record is zSFODD_Machine Pistol on PC.",
+   "priority": "required"
+  },
+  {
+   "id": "P02",
+   "class": "CAI",
+   "object": "SecondAI_01",
+   "property": "Weapon0",
+   "old": "Machine Pistol",
+   "new": "zSFODD_Machine Pistol",
+   "reason": "SM15 record is zSFODD_Machine Pistol on PC.",
+   "priority": "required"
+  },
+  {
+   "id": "P03",
+   "class": "GunMount",
+   "object": "DeltaKiller",
+   "property": "Weapon",
+   "old": "Machine Pistol",
+   "new": "zSFODD_Machine Pistol",
+   "reason": "SM15 record is zSFODD_Machine Pistol on PC.",
+   "priority": "required"
+  },
+  {
+   "id": "P05",
+   "class": "Trigger",
+   "object": "EndFadeDialog_tr",
+   "property": "Command1",
+   "old": "msg player (objective add objective46);",
+   "new": "msg player (objective add zSFODD_Objective46);",
+   "reason": "Objective46 is console-only; merged DB has zSFODD_Objective46.",
+   "priority": "required"
+  },
+  {
+   "id": "P06",
+   "class": "CAI",
+   "object": "Standing_Bishop",
+   "property": "ModelTemplate",
+   "old": "Bishop",
+   "new": "zSFODD_X360_Bishop",
+   "reason": "X360 Bishop behaviour (AIName Alice, Soldier_Holiday tree, IanHives_Holiday model) via zSFODD_X360_Bishop.",
+   "priority": "required"
+  },
+  {
+   "id": "P06",
+   "class": "CAI",
+   "object": "Machine_Hostage_Temp",
+   "property": "ModelTemplate",
+   "old": "Bishop",
+   "new": "zSFODD_X360_Bishop",
+   "reason": "Same Bishop record.",
+   "priority": "required"
+  },
+  {
+   "id": "P10",
+   "class": "StartupCommand",
+   "object": "MissionStartTrigger",
+   "property": "Command",
+   "old": "msg FadeSequenceCO on;msg Setup_Trigger on;msg DeltaKiller (Hidden 1);",
+   "new": "msg FadeSequenceCO on;msg Setup_Trigger on;msg DeltaKiller (Hidden 1);msg player (slowmo on noslowmo);",
+   "reason": "Slow-Mo lock at mission start (as SFOD-D).",
+   "priority": "required"
+  },
+  {
+   "id": "P11",
+   "class": "PlayerTrigger",
+   "object": "SixthAI_Trigger",
+   "property": "Command1",
+   "old": "msg Assassin_sp Spawn;msg sixthaiSpawner00 spawn;delay 1 (msg expl01 on);Delay 1 (msg Door-Db_industrial_kicked_0100.blow on);Delay 1.5 (msg player (slowmo on slowmo));Delay 2.5 (msg player (slowmo off));Delay 3 (msg <CAI>LastHeavy (animate base));",
+   "new": "msg Assassin_sp Spawn;msg sixthaiSpawner00 spawn;delay 1 (msg expl01 on);Delay 1 (msg Door-Db_industrial_kicked_0100.blow on);Delay 1.5 (msg player (slowmo on slowmo));Delay 2.5 (msg player (slowmo off));Delay 2.55 (msg player (slowmo on noslowmo));Delay 3 (msg <CAI>LastHeavy (animate base));",
+   "reason": "Re-lock Slow-Mo 0.05 s after the scripted Heavy Armor slow-mo ends.",
+   "priority": "required"
+  }
+ ]
+}

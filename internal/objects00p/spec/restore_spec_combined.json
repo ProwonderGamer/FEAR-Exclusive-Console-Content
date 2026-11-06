@@ -1,0 +1,2244 @@
+{
+ "ATC_Roof": {
+  "ops": [
+   {
+    "op": "edit",
+    "index": 50,
+    "class": "CAI",
+    "name": "R2_TEMP02",
+    "weapon": "sm15",
+    "needs_append": null,
+    "edits": {
+     "Weapon0": [
+      "<none>",
+      "zSFODD_Machine Pistol"
+     ],
+     "Socket0": [
+      "<none>",
+      "RightHand"
+     ]
+    }
+   },
+   {
+    "op": "edit",
+    "index": 52,
+    "class": "CAI",
+    "name": "LowerHall_CAITemp",
+    "weapon": "sm15",
+    "needs_append": null,
+    "edits": {
+     "Weapon0": [
+      "<none>",
+      "zSFODD_Machine Pistol"
+     ],
+     "Socket0": [
+      "<none>",
+      "RightHand"
+     ]
+    }
+   },
+   {
+    "op": "edit",
+    "index": 54,
+    "class": "CAI",
+    "name": "INT2_TEMP",
+    "weapon": "sm15",
+    "needs_append": null,
+    "edits": {
+     "Weapon0": [
+      "<none>",
+      "zSFODD_Machine Pistol"
+     ],
+     "Socket0": [
+      "<none>",
+      "RightHand"
+     ]
+    },
+    "console": {
+     "props": [
+      "UseDefaultWeapons"
+     ]
+    }
+   },
+   {
+    "op": "edit",
+    "index": 319,
+    "class": "CAI",
+    "name": "Interior_DeadATC01.T",
+    "weapon": "sm15",
+    "needs_append": null,
+    "edits": {
+     "Weapon0": [
+      "<none>",
+      "zSFODD_Machine Pistol"
+     ],
+     "Socket0": [
+      "<none>",
+      "RightHand"
+     ]
+    }
+   },
+   {
+    "op": "edit",
+    "index": 320,
+    "class": "CAI",
+    "name": "Interior_DeadATC02.T",
+    "weapon": "sm15",
+    "needs_append": null,
+    "edits": {
+     "Weapon0": [
+      "<none>",
+      "zSFODD_Machine Pistol"
+     ],
+     "Socket0": [
+      "<none>",
+      "RightHand"
+     ]
+    }
+   },
+   {
+    "op": "edit",
+    "index": 537,
+    "class": "AISpawner",
+    "name": "HeliGun_C1toC2_Ambush_S01.Sp",
+    "weapon": "sm15",
+    "needs_append": "AmbushCAI",
+    "edits": {
+     "Target": [
+      "002_SoldierART02",
+      "AmbushCAI"
+     ]
+    }
+   },
+   {
+    "op": "edit",
+    "index": 540,
+    "class": "AISpawner",
+    "name": "HeliGun_C1toC2_Ambush_S02.Sp",
+    "weapon": "sm15",
+    "needs_append": "AmbushCAI",
+    "edits": {
+     "Target": [
+      "002_SoldierART02",
+      "AmbushCAI"
+     ]
+    }
+   },
+   {
+    "op": "edit",
+    "index": 974,
+    "class": "CAI",
+    "name": "R2_TEMP03",
+    "weapon": "sm15",
+    "needs_append": null,
+    "edits": {
+     "Weapon0": [
+      "<none>",
+      "zSFODD_Machine Pistol"
+     ],
+     "Socket0": [
+      "<none>",
+      "RightHand"
+     ]
+    }
+   },
+   {
+    "op": "edit",
+    "index": 977,
+    "class": "CAI",
+    "name": "MRoomTemp02",
+    "weapon": "sm15",
+    "needs_append": null,
+    "edits": {
+     "Weapon0": [
+      "<none>",
+      "zSFODD_Machine Pistol"
+     ],
+     "Socket0": [
+      "<none>",
+      "RightHand"
+     ]
+    }
+   },
+   {
+    "op": "edit",
+    "index": 978,
+    "class": "CAI",
+    "name": "INT2_TEMP00",
+    "weapon": "sm15",
+    "needs_append": null,
+    "edits": {
+     "Weapon0": [
+      "<none>",
+      "zSFODD_Machine Pistol"
+     ],
+     "Socket0": [
+      "<none>",
+      "RightHand"
+     ]
+    }
+   },
+   {
+    "op": "edit",
+    "index": 1014,
+    "class": "WeaponItem",
+    "name": "AssaultRifle-02",
+    "weapon": "sm15",
+    "needs_append": null,
+    "edits": {
+     "WeaponType": [
+      "Assault Rifle",
+      "zSFODD_Machine Pistol"
+     ],
+     "Filename": [
+      "guns\\models_hh\\assaultrifle.Model00p",
+      "guns\\models_hh\\SM15machinePistol.Model00p"
+     ]
+    },
+    "console": {
+     "props": [
+      "Pos"
+     ]
+    }
+   },
+   {
+    "op": "edit",
+    "index": 1015,
+    "class": "WeaponItem",
+    "name": "AssaultRifle-03",
+    "weapon": "sm15",
+    "needs_append": null,
+    "edits": {
+     "WeaponType": [
+      "Assault Rifle",
+      "zSFODD_Machine Pistol"
+     ],
+     "Filename": [
+      "guns\\models_hh\\assaultrifle.Model00p",
+      "guns\\models_hh\\SM15machinePistol.Model00p"
+     ]
+    },
+    "console": {
+     "props": [
+      "Pos"
+     ]
+    }
+   },
+   {
+    "op": "append",
+    "class": "CAI",
+    "base_index": 979,
+    "base_name": "002_SoldierART02",
+    "new_name": "AmbushCAI",
+    "set": {
+     "Socket0": "RightHand",
+     "Weapon0": "zSFODD_Machine Pistol",
+     "Name": "AmbushCAI",
+     "Template": true
+    },
+    "weapon": "sm15",
+    "console": {
+     "props": [
+      "Pos",
+      "Rotation"
+     ]
+    }
+   },
+   {
+    "op": "append",
+    "class": "WeaponItem",
+    "base_index": 1015,
+    "base_name": "AssaultRifle-03",
+    "new_name": "AssaultRifle-05",
+    "set": {
+     "WeaponType": "zSFODD_Machine Pistol",
+     "Filename": "guns\\models_hh\\SM15machinePistol.Model00p",
+     "Name": "AssaultRifle-05"
+    },
+    "weapon": "sm15",
+    "console": {
+     "props": [
+      "AmmoAmount",
+      "AmmoType",
+      "DMTouchPickup",
+      "GlobalResources",
+      "Gravity",
+      "Health",
+      "LifeTime",
+      "Locked",
+      "MPRespawn",
+      "Material",
+      "Model",
+      "ModelOverride",
+      "MoveToFloor",
+      "PickupCommand",
+      "Placed",
+      "Pos",
+      "RespawnTime",
+      "Rotation",
+      "SPRespawn",
+      "Scale",
+      "Shadow",
+      "Solid",
+      "Team",
+      "Template",
+      "TouchPickup",
+      "Visible",
+      "WorldAnimation"
+     ]
+    }
+   }
+  ]
+ },
+ "Admin": {
+  "ops": [
+   {
+    "op": "edit",
+    "index": 571,
+    "class": "CAI",
+    "name": "Admin_Entry_DeadSoldier01.T",
+    "weapon": "sm15",
+    "needs_append": null,
+    "edits": {
+     "Weapon0": [
+      "<none>",
+      "zSFODD_Machine Pistol"
+     ],
+     "Socket0": [
+      "<none>",
+      "RightHand"
+     ]
+    }
+   },
+   {
+    "op": "edit",
+    "index": 574,
+    "class": "CAI",
+    "name": "Admin_Entry_DeadSoldier02.T",
+    "weapon": "sm15",
+    "needs_append": null,
+    "edits": {
+     "Weapon0": [
+      "Assault Rifle",
+      "zSFODD_Machine Pistol"
+     ]
+    }
+   },
+   {
+    "op": "edit",
+    "index": 584,
+    "class": "CAI",
+    "name": "Admin_Entry_DeadSoldier00.T",
+    "weapon": "sm15",
+    "needs_append": null,
+    "edits": {
+     "Weapon0": [
+      "<none>",
+      "zSFODD_Machine Pistol"
+     ],
+     "Socket0": [
+      "<none>",
+      "RightHand"
+     ]
+    }
+   },
+   {
+    "op": "edit",
+    "index": 684,
+    "class": "CAI",
+    "name": "Admin_Entry_DeadSoldier03.T",
+    "weapon": "sm15",
+    "needs_append": null,
+    "edits": {
+     "Weapon0": [
+      "<none>",
+      "zSFODD_Machine Pistol"
+     ],
+     "Socket0": [
+      "<none>",
+      "RightHand"
+     ]
+    }
+   },
+   {
+    "op": "edit",
+    "index": 685,
+    "class": "CAI",
+    "name": "Admin_Entry_DeadSoldier04.T",
+    "weapon": "sm15",
+    "needs_append": null,
+    "edits": {
+     "Weapon0": [
+      "<none>",
+      "zSFODD_Machine Pistol"
+     ],
+     "Socket0": [
+      "<none>",
+      "RightHand"
+     ]
+    }
+   },
+   {
+    "op": "edit",
+    "index": 840,
+    "class": "WeaponItem",
+    "name": "SMG-01",
+    "weapon": "sm15",
+    "needs_append": null,
+    "edits": {
+     "WeaponType": [
+      "Submachinegun",
+      "zSFODD_Machine Pistol"
+     ],
+     "Filename": [
+      "guns\\models_hh\\SubMachineGun.Model00p",
+      "guns\\models_hh\\SM15machinePistol.Model00p"
+     ]
+    }
+   },
+   {
+    "op": "edit",
+    "index": 841,
+    "class": "WeaponItem",
+    "name": "SMG-02",
+    "weapon": "sm15",
+    "needs_append": null,
+    "edits": {
+     "WeaponType": [
+      "Submachinegun",
+      "zSFODD_Machine Pistol"
+     ],
+     "Filename": [
+      "guns\\models_hh\\SubMachineGun.Model00p",
+      "guns\\models_hh\\SM15machinePistol.Model00p"
+     ]
+    }
+   },
+   {
+    "op": "edit",
+    "index": 980,
+    "class": "CAI",
+    "name": "I04P02_Lounge_ART",
+    "weapon": "sm15",
+    "needs_append": null,
+    "edits": {
+     "Weapon0": [
+      "Assault rifle",
+      "zSFODD_Machine Pistol"
+     ]
+    }
+   },
+   {
+    "op": "edit",
+    "index": 1304,
+    "class": "CAI",
+    "name": "Admin_Sec_BloodySoldier00.CAI",
+    "weapon": "sm15",
+    "needs_append": null,
+    "edits": {
+     "Weapon0": [
+      "<none>",
+      "zSFODD_Machine Pistol"
+     ],
+     "Socket0": [
+      "<none>",
+      "RightHand"
+     ]
+    }
+   },
+   {
+    "op": "edit",
+    "index": 1514,
+    "class": "AISpawner",
+    "name": "Arrival_Server_S04.sp",
+    "weapon": "sm15",
+    "needs_append": "Server_MachPist",
+    "edits": {
+     "Target": [
+      "Server_SMgT",
+      "Server_MachPist"
+     ]
+    }
+   },
+   {
+    "op": "edit",
+    "index": 1521,
+    "class": "AISpawner",
+    "name": "Arrival_Server_S03.sp",
+    "weapon": "sm15",
+    "needs_append": "Server_MachPist",
+    "edits": {
+     "Target": [
+      "Server_SMgT",
+      "Server_MachPist"
+     ]
+    }
+   },
+   {
+    "op": "append",
+    "class": "CAI",
+    "base_index": 1500,
+    "base_name": "Server_SMgT",
+    "new_name": "Server_MachPist",
+    "set": {
+     "Weapon0": "zSFODD_Machine Pistol",
+     "Socket0": "RightHand",
+     "Name": "Server_MachPist",
+     "Template": true
+    },
+    "weapon": "sm15",
+    "console": {
+     "props": [
+      "Pos",
+      "Rotation"
+     ]
+    }
+   },
+   {
+    "op": "append",
+    "class": "WeaponItem",
+    "base_index": 1578,
+    "base_name": "Gunrack-01.AssaultRifle-01",
+    "new_name": "MachPist01",
+    "set": {
+     "WeaponType": "zSFODD_Machine Pistol",
+     "Filename": "guns\\models_hh\\SM15machinePistol.Model00p",
+     "Name": "MachPist01"
+    },
+    "weapon": "sm15",
+    "console": {
+     "props": [
+      "AmmoAmount",
+      "AmmoType",
+      "DMTouchPickup",
+      "GlobalResources",
+      "Gravity",
+      "Health",
+      "LifeTime",
+      "Locked",
+      "MPRespawn",
+      "Material",
+      "Model",
+      "ModelOverride",
+      "MoveToFloor",
+      "PickupCommand",
+      "Placed",
+      "Pos",
+      "RespawnTime",
+      "Rotation",
+      "SPRespawn",
+      "Scale",
+      "Shadow",
+      "Solid",
+      "Team",
+      "Template",
+      "TouchPickup",
+      "Visible",
+      "WorldAnimation"
+     ]
+    }
+   },
+   {
+    "op": "append",
+    "class": "WeaponItem",
+    "base_index": 1578,
+    "base_name": "Gunrack-01.AssaultRifle-01",
+    "new_name": "MachPist02",
+    "set": {
+     "WeaponType": "zSFODD_Machine Pistol",
+     "Filename": "guns\\models_hh\\SM15machinePistol.Model00p",
+     "Name": "MachPist02"
+    },
+    "weapon": "sm15",
+    "console": {
+     "props": [
+      "AmmoAmount",
+      "AmmoType",
+      "DMTouchPickup",
+      "GlobalResources",
+      "Gravity",
+      "Health",
+      "LifeTime",
+      "Locked",
+      "MPRespawn",
+      "Material",
+      "Model",
+      "ModelOverride",
+      "MoveToFloor",
+      "PickupCommand",
+      "Placed",
+      "Pos",
+      "RespawnTime",
+      "Rotation",
+      "SPRespawn",
+      "Scale",
+      "Shadow",
+      "Solid",
+      "Team",
+      "Template",
+      "TouchPickup",
+      "Visible",
+      "WorldAnimation"
+     ]
+    }
+   }
+  ]
+ },
+ "Alice": {
+  "ops": [
+   {
+    "op": "edit",
+    "index": 528,
+    "class": "CAI",
+    "name": "Sec_SMgT",
+    "weapon": "sm15",
+    "needs_append": null,
+    "edits": {
+     "Weapon0": [
+      "<none>",
+      "zSFODD_Machine Pistol"
+     ],
+     "Socket0": [
+      "<none>",
+      "RightHand"
+     ]
+    }
+   },
+   {
+    "op": "edit",
+    "index": 1111,
+    "class": "CAI",
+    "name": "Last-Stand_HA_NgT",
+    "weapon": "watson",
+    "needs_append": null,
+    "edits": {
+     "Weapon0": [
+      "Nail Gun",
+      "zSFODD_AutoShotgun"
+     ]
+    }
+   }
+  ]
+ },
+ "Alma": {
+  "ops": [
+   {
+    "op": "edit",
+    "index": 1252,
+    "class": "WeaponItem",
+    "name": "Shotgun-Lean00.SG",
+    "weapon": "watson",
+    "needs_append": null,
+    "edits": {
+     "WeaponType": [
+      "Shotgun",
+      "zSFODD_AutoShotgun"
+     ],
+     "Filename": [
+      "guns\\models_hh\\shotgun.Model00p",
+      "guns\\models_hh\\WatsonSAS.Model00p"
+     ]
+    },
+    "console": {
+     "props": [
+      "Pos"
+     ]
+    }
+   }
+  ]
+ },
+ "Badge": {
+  "ops": [
+   {
+    "op": "edit",
+    "index": 78,
+    "class": "CAI",
+    "name": "Lift_Sol_ART",
+    "weapon": "sm15",
+    "needs_append": null,
+    "edits": {
+     "Weapon0": [
+      "Assault Rifle",
+      "zSFODD_Machine Pistol"
+     ]
+    }
+   },
+   {
+    "op": "edit",
+    "index": 597,
+    "class": "CAI",
+    "name": "Remote02_SMgT",
+    "weapon": "sm15",
+    "needs_append": null,
+    "edits": {
+     "Weapon0": [
+      "Submachinegun",
+      "zSFODD_Machine Pistol"
+     ]
+    }
+   }
+  ]
+ },
+ "Bishop_Evac": {
+  "ops": [
+   {
+    "op": "edit",
+    "index": 55,
+    "class": "CAI",
+    "name": "RoofB_Int_SMgT",
+    "weapon": "sm15",
+    "needs_append": null,
+    "edits": {
+     "Weapon0": [
+      "Submachinegun",
+      "zSFODD_Machine Pistol"
+     ]
+    }
+   },
+   {
+    "op": "edit",
+    "index": 265,
+    "class": "CAI",
+    "name": "Machine_Wave1_SMgT",
+    "weapon": "sm15",
+    "needs_append": null,
+    "edits": {
+     "Weapon0": [
+      "Submachinegun",
+      "zSFODD_Machine Pistol"
+     ]
+    }
+   },
+   {
+    "op": "edit",
+    "index": 431,
+    "class": "WeaponItem",
+    "name": "SMG-01",
+    "weapon": "sm15",
+    "needs_append": null,
+    "edits": {
+     "WeaponType": [
+      "Submachinegun",
+      "zSFODD_Machine Pistol"
+     ],
+     "Filename": [
+      "guns\\models_hh\\SubMachineGun.Model00p",
+      "guns\\models_hh\\SM15machinePistol.Model00p"
+     ]
+    }
+   },
+   {
+    "op": "edit",
+    "index": 432,
+    "class": "WeaponItem",
+    "name": "SMG-02",
+    "weapon": "sm15",
+    "needs_append": null,
+    "edits": {
+     "WeaponType": [
+      "Submachinegun",
+      "zSFODD_Machine Pistol"
+     ],
+     "Filename": [
+      "guns\\models_hh\\SubMachineGun.Model00p",
+      "guns\\models_hh\\SM15machinePistol.Model00p"
+     ]
+    }
+   },
+   {
+    "op": "edit",
+    "index": 464,
+    "class": "CAI",
+    "name": "Wave1_SMgT",
+    "weapon": "sm15",
+    "needs_append": null,
+    "edits": {
+     "Weapon0": [
+      "Submachinegun",
+      "zSFODD_Machine Pistol"
+     ]
+    }
+   },
+   {
+    "op": "edit",
+    "index": 709,
+    "class": "CAI",
+    "name": "RoofB_Krige_ART",
+    "weapon": "sm15",
+    "needs_append": null,
+    "edits": {
+     "Weapon0": [
+      "Assault Rifle",
+      "zSFODD_Machine Pistol"
+     ]
+    }
+   }
+  ]
+ },
+ "Bishop_Rescue": {
+  "ops": [
+   {
+    "op": "edit",
+    "index": 19,
+    "class": "AISpawner",
+    "name": "ConArea_Guard_00.Sp",
+    "weapon": "sm15",
+    "needs_append": null,
+    "edits": {
+     "Target": [
+      "ConArea_smg_CaiT",
+      "FirstHost_1st_combat_SMgT"
+     ]
+    }
+   },
+   {
+    "op": "edit",
+    "index": 24,
+    "class": "AISpawner",
+    "name": "ConArea_Guard_01.Sp",
+    "weapon": "sm15",
+    "needs_append": null,
+    "edits": {
+     "Target": [
+      "ConArea_smg_CaiT",
+      "FirstHost_1st_combat_SMgT"
+     ]
+    }
+   },
+   {
+    "op": "edit",
+    "index": 71,
+    "class": "AISpawner",
+    "name": "ConArea_Guard_05.Sp",
+    "weapon": "sm15",
+    "needs_append": null,
+    "edits": {
+     "Target": [
+      "ConArea_AssRif_CaiT",
+      "FirstHost_1st_combat_SMgT"
+     ]
+    }
+   },
+   {
+    "op": "edit",
+    "index": 76,
+    "class": "AISpawner",
+    "name": "ConArea_Guard_06.Sp",
+    "weapon": "sm15",
+    "needs_append": null,
+    "edits": {
+     "Target": [
+      "ConArea_AssRif_CaiT",
+      "FirstHost_1st_combat_SMgT"
+     ]
+    }
+   },
+   {
+    "op": "edit",
+    "index": 241,
+    "class": "AISpawner",
+    "name": "ConArea_Guard_18.Sp",
+    "weapon": "sm15",
+    "needs_append": null,
+    "edits": {
+     "Target": [
+      "ConArea_AssRif_CaiT",
+      "FirstHost_1st_combat_SMgT"
+     ]
+    }
+   },
+   {
+    "op": "edit",
+    "index": 250,
+    "class": "AISpawner",
+    "name": "ConArea_Guard_20.Sp",
+    "weapon": "sm15",
+    "needs_append": null,
+    "edits": {
+     "Target": [
+      "ConArea_smg_CaiT",
+      "FirstHost_1st_combat_SMgT"
+     ]
+    }
+   },
+   {
+    "op": "edit",
+    "index": 567,
+    "class": "WeaponItem",
+    "name": "Pistol-02",
+    "weapon": "sm15",
+    "needs_append": null,
+    "edits": {
+     "WeaponType": [
+      "Pistol",
+      "zSFODD_Machine Pistol"
+     ],
+     "Filename": [
+      "guns\\models_hh\\pistol.Model00p",
+      "guns\\models_hh\\SM15machinePistol.Model00p"
+     ]
+    }
+   },
+   {
+    "op": "edit",
+    "index": 570,
+    "class": "WeaponItem",
+    "name": "SMG-02",
+    "weapon": "sm15",
+    "needs_append": null,
+    "edits": {
+     "WeaponType": [
+      "Submachinegun",
+      "zSFODD_Machine Pistol"
+     ],
+     "Filename": [
+      "guns\\models_hh\\SubMachineGun.Model00p",
+      "guns\\models_hh\\SM15machinePistol.Model00p"
+     ]
+    }
+   },
+   {
+    "op": "edit",
+    "index": 573,
+    "class": "WeaponItem",
+    "name": "AssaultRifle-08",
+    "weapon": "sm15",
+    "needs_append": null,
+    "edits": {
+     "WeaponType": [
+      "Assault Rifle",
+      "zSFODD_Machine Pistol"
+     ],
+     "Filename": [
+      "guns\\models_hh\\assaultrifle.Model00p",
+      "guns\\models_hh\\SM15machinePistol.Model00p"
+     ]
+    },
+    "console": {
+     "props": [
+      "Pos"
+     ]
+    }
+   },
+   {
+    "op": "edit",
+    "index": 575,
+    "class": "WeaponItem",
+    "name": "AssaultRifle-09",
+    "weapon": "sm15",
+    "needs_append": null,
+    "edits": {
+     "WeaponType": [
+      "Assault Rifle",
+      "zSFODD_Machine Pistol"
+     ],
+     "Filename": [
+      "guns\\models_hh\\assaultrifle.Model00p",
+      "guns\\models_hh\\SM15machinePistol.Model00p"
+     ]
+    },
+    "console": {
+     "props": [
+      "Pos"
+     ]
+    }
+   },
+   {
+    "op": "edit",
+    "index": 824,
+    "class": "CAI",
+    "name": "FirstHost_1st_combat_SMgT",
+    "weapon": "sm15",
+    "needs_append": null,
+    "edits": {
+     "Weapon0": [
+      "Submachinegun",
+      "zSFODD_Machine Pistol"
+     ]
+    }
+   },
+   {
+    "op": "edit",
+    "index": 1192,
+    "class": "CAI",
+    "name": "018_SoldierART",
+    "weapon": "sm15",
+    "needs_append": null,
+    "edits": {
+     "Weapon0": [
+      "Assault Rifle",
+      "zSFODD_Machine Pistol"
+     ]
+    }
+   },
+   {
+    "op": "edit",
+    "index": 1590,
+    "class": "WeaponItem",
+    "name": "AssaultRifle-11",
+    "weapon": "sm15",
+    "needs_append": null,
+    "edits": {
+     "WeaponType": [
+      "Assault Rifle",
+      "zSFODD_Machine Pistol"
+     ],
+     "Filename": [
+      "guns\\models_hh\\assaultrifle.Model00p",
+      "guns\\models_hh\\SM15machinePistol.Model00p"
+     ]
+    }
+   },
+   {
+    "op": "append",
+    "class": "WeaponItem",
+    "base_index": 1598,
+    "base_name": "Grenade-Frag-05",
+    "new_name": "MachPist01",
+    "set": {
+     "WeaponType": "zSFODD_Machine Pistol",
+     "Filename": "guns\\models_hh\\SM15machinePistol.Model00p",
+     "Name": "MachPist01"
+    },
+    "weapon": "sm15",
+    "console": {
+     "props": [
+      "AmmoAmount",
+      "AmmoType",
+      "DMTouchPickup",
+      "GlobalResources",
+      "Gravity",
+      "Health",
+      "LifeTime",
+      "Locked",
+      "MPRespawn",
+      "Material",
+      "Model",
+      "ModelOverride",
+      "MoveToFloor",
+      "PickupCommand",
+      "Placed",
+      "Pos",
+      "RespawnTime",
+      "Rotation",
+      "SPRespawn",
+      "Scale",
+      "Shadow",
+      "Solid",
+      "Team",
+      "Template",
+      "TouchPickup",
+      "Visible",
+      "WorldAnimation"
+     ]
+    }
+   },
+   {
+    "op": "append",
+    "class": "WeaponItem",
+    "base_index": 1599,
+    "base_name": "SMG-07",
+    "new_name": "MachPist02",
+    "set": {
+     "WeaponType": "zSFODD_Machine Pistol",
+     "Filename": "guns\\models_hh\\SM15machinePistol.Model00p",
+     "Name": "MachPist02"
+    },
+    "weapon": "sm15",
+    "console": {
+     "props": [
+      "AmmoAmount",
+      "AmmoType",
+      "DMTouchPickup",
+      "GlobalResources",
+      "Gravity",
+      "Health",
+      "LifeTime",
+      "Locked",
+      "MPRespawn",
+      "Material",
+      "Model",
+      "ModelOverride",
+      "MoveToFloor",
+      "PickupCommand",
+      "Placed",
+      "Pos",
+      "RespawnTime",
+      "Rotation",
+      "SPRespawn",
+      "Scale",
+      "Shadow",
+      "Solid",
+      "Team",
+      "Template",
+      "TouchPickup",
+      "Visible",
+      "WorldAnimation"
+     ]
+    }
+   }
+  ]
+ },
+ "Docks": {
+  "ops": [
+   {
+    "op": "edit",
+    "index": 31,
+    "class": "CAI",
+    "name": "SoldierART",
+    "weapon": "sm15",
+    "needs_append": null,
+    "edits": {
+     "Weapon0": [
+      "Assault Rifle",
+      "zSFODD_Machine Pistol"
+     ]
+    }
+   },
+   {
+    "op": "edit",
+    "index": 1541,
+    "class": "WeaponItem",
+    "name": "AssaultRifle01",
+    "weapon": "sm15",
+    "needs_append": null,
+    "edits": {
+     "WeaponType": [
+      "Assault Rifle",
+      "zSFODD_Machine Pistol"
+     ],
+     "Filename": [
+      "guns\\models_hh\\assaultrifle.Model00p",
+      "guns\\models_hh\\SM15machinePistol.Model00p"
+     ]
+    },
+    "console": {
+     "props": [
+      "Pos"
+     ],
+     "name": "Platform_MachPist_AssRifle01"
+    }
+   },
+   {
+    "op": "edit",
+    "index": 1547,
+    "class": "WeaponItem",
+    "name": "AssaultRifle03",
+    "weapon": "sm15",
+    "needs_append": null,
+    "edits": {
+     "WeaponType": [
+      "Assault Rifle",
+      "zSFODD_Machine Pistol"
+     ],
+     "Filename": [
+      "guns\\models_hh\\assaultrifle.Model00p",
+      "guns\\models_hh\\SM15machinePistol.Model00p"
+     ]
+    },
+    "console": {
+     "props": [
+      "Pos"
+     ],
+     "name": "Platform_MachPist_AssRifle02"
+    }
+   },
+   {
+    "op": "append",
+    "class": "WeaponItem",
+    "base_index": 1541,
+    "base_name": "AssaultRifle01",
+    "new_name": "Platform_MachPist_None01",
+    "set": {
+     "WeaponType": "zSFODD_Machine Pistol",
+     "Filename": "guns\\models_hh\\SM15machinePistol.Model00p",
+     "Name": "Platform_MachPist_None01"
+    },
+    "weapon": "sm15",
+    "console": {
+     "props": [
+      "AmmoAmount",
+      "AmmoType",
+      "DMTouchPickup",
+      "GlobalResources",
+      "Gravity",
+      "Health",
+      "LifeTime",
+      "Locked",
+      "MPRespawn",
+      "Material",
+      "Model",
+      "ModelOverride",
+      "MoveToFloor",
+      "PickupCommand",
+      "Placed",
+      "Pos",
+      "RespawnTime",
+      "Rotation",
+      "SPRespawn",
+      "Scale",
+      "Shadow",
+      "Solid",
+      "Team",
+      "Template",
+      "TouchPickup",
+      "Visible",
+      "WorldAnimation"
+     ]
+    }
+   },
+   {
+    "op": "append",
+    "class": "WeaponItem",
+    "base_index": 1549,
+    "base_name": "Pistol03",
+    "new_name": "Platform_MachPist_None02",
+    "set": {
+     "WeaponType": "zSFODD_Machine Pistol",
+     "Filename": "guns\\models_hh\\SM15machinePistol.Model00p",
+     "Name": "Platform_MachPist_None02"
+    },
+    "weapon": "sm15",
+    "console": {
+     "props": [
+      "AmmoAmount",
+      "AmmoType",
+      "DMTouchPickup",
+      "GlobalResources",
+      "Gravity",
+      "Health",
+      "LifeTime",
+      "Locked",
+      "MPRespawn",
+      "Material",
+      "Model",
+      "ModelOverride",
+      "MoveToFloor",
+      "PickupCommand",
+      "Placed",
+      "Pos",
+      "RespawnTime",
+      "Rotation",
+      "SPRespawn",
+      "Scale",
+      "Shadow",
+      "Solid",
+      "Team",
+      "Template",
+      "TouchPickup",
+      "Visible",
+      "WorldAnimation"
+     ]
+    }
+   }
+  ]
+ },
+ "Facility_Bypass": {
+  "ops": [
+   {
+    "op": "edit",
+    "index": 8,
+    "class": "AISpawner",
+    "name": "PipeRoom01_guard01.Sp",
+    "weapon": "watson",
+    "needs_append": "02_Elite_ASG",
+    "edits": {
+     "Target": [
+      "02_Elite_ART",
+      "02_Elite_ASG"
+     ]
+    }
+   },
+   {
+    "op": "edit",
+    "index": 182,
+    "class": "AISpawner",
+    "name": "ATC_BY01_Menace00.Sp",
+    "weapon": "watson",
+    "needs_append": "ATC_BY01_CAI02",
+    "edits": {
+     "Target": [
+      "ATC_BY01_CAI",
+      "ATC_BY01_CAI02"
+     ]
+    }
+   },
+   {
+    "op": "edit",
+    "index": 2544,
+    "class": "WeaponItem",
+    "name": "Shotgun-Lean01.SG",
+    "weapon": "watson",
+    "needs_append": null,
+    "edits": {
+     "WeaponType": [
+      "Shotgun",
+      "zSFODD_AutoShotgun"
+     ],
+     "Filename": [
+      "guns\\models_hh\\shotgun.Model00p",
+      "guns\\models_hh\\WatsonSAS.Model00p"
+     ]
+    },
+    "console": {
+     "props": [
+      "Pos"
+     ]
+    }
+   },
+   {
+    "op": "append",
+    "class": "CAI",
+    "base_index": 22,
+    "base_name": "02_Elite_ART",
+    "new_name": "02_Elite_ASG",
+    "set": {
+     "Weapon0": "zSFODD_AutoShotgun",
+     "Socket0": "RightHand",
+     "Name": "02_Elite_ASG",
+     "Template": true
+    },
+    "weapon": "watson",
+    "console": {
+     "props": [
+      "Pos",
+      "Rotation"
+     ]
+    }
+   },
+   {
+    "op": "append",
+    "class": "CAI",
+    "base_index": 190,
+    "base_name": "ATC_BY01_CAI",
+    "new_name": "ATC_BY01_CAI02",
+    "set": {
+     "Weapon0": "zSFODD_AutoShotgun",
+     "Socket0": "RightHand",
+     "Name": "ATC_BY01_CAI02",
+     "Template": true
+    },
+    "weapon": "watson",
+    "console": {
+     "props": [
+      "Pos",
+      "Rotation"
+     ]
+    }
+   }
+  ]
+ },
+ "Facility_Upper": {
+  "ops": [
+   {
+    "op": "edit",
+    "index": 393,
+    "class": "CAI",
+    "name": "PIB_SoldierPatrol",
+    "weapon": "sm15",
+    "needs_append": null,
+    "edits": {
+     "Weapon0": [
+      "Assault Rifle",
+      "zSFODD_Machine Pistol"
+     ]
+    }
+   },
+   {
+    "op": "edit",
+    "index": 397,
+    "class": "CAI",
+    "name": "FUE_ATC_SMG_Gd00",
+    "weapon": "sm15",
+    "needs_append": null,
+    "edits": {
+     "Weapon0": [
+      "Submachinegun",
+      "zSFODD_Machine Pistol"
+     ]
+    }
+   },
+   {
+    "op": "edit",
+    "index": 952,
+    "class": "CAI",
+    "name": "FUR_ATC_SMgT",
+    "weapon": "sm15",
+    "needs_append": null,
+    "edits": {
+     "Weapon0": [
+      "Submachinegun",
+      "zSFODD_Machine Pistol"
+     ]
+    }
+   },
+   {
+    "op": "edit",
+    "index": 954,
+    "class": "CAI",
+    "name": "hall_ATC_ART",
+    "weapon": "sm15",
+    "needs_append": null,
+    "edits": {
+     "Weapon0": [
+      "Assault Rifle",
+      "zSFODD_Machine Pistol"
+     ]
+    }
+   },
+   {
+    "op": "edit",
+    "index": 1093,
+    "class": "WeaponItem",
+    "name": "Cannon-01",
+    "weapon": "watson",
+    "needs_append": null,
+    "edits": {
+     "WeaponType": [
+      "Cannon",
+      "zSFODD_AutoShotgun"
+     ],
+     "Filename": [
+      "guns\\models_hh\\cannon.Model00p",
+      "guns\\models_hh\\WatsonSAS.Model00p"
+     ]
+    },
+    "console": {
+     "props": [
+      "Pos",
+      "Rotation"
+     ]
+    }
+   }
+  ]
+ },
+ "Factory": {
+  "ops": [
+   {
+    "op": "edit",
+    "index": 31,
+    "class": "CAI",
+    "name": "FJ_Soldier_SMG_GD_00",
+    "weapon": "sm15",
+    "needs_append": null,
+    "edits": {
+     "Weapon0": [
+      "Submachinegun",
+      "zSFODD_Machine Pistol"
+     ]
+    }
+   },
+   {
+    "op": "edit",
+    "index": 212,
+    "class": "CAI",
+    "name": "Alley_Soldier_Guard_AR_T",
+    "weapon": "sm15",
+    "needs_append": null,
+    "edits": {
+     "Weapon0": [
+      "Assault Rifle",
+      "zSFODD_Machine Pistol"
+     ]
+    }
+   },
+   {
+    "op": "edit",
+    "index": 1094,
+    "class": "CAI",
+    "name": "RoutHolid_HeveyA_standard_CAI00",
+    "weapon": "watson",
+    "needs_append": null,
+    "edits": {
+     "Weapon0": [
+      "Nail Gun",
+      "zSFODD_AutoShotgun"
+     ]
+    }
+   },
+   {
+    "op": "edit",
+    "index": 1521,
+    "class": "CAI",
+    "name": "ATC_TMP",
+    "weapon": "sm15",
+    "needs_append": null,
+    "edits": {
+     "Weapon0": [
+      "Plasma weapon",
+      "zSFODD_Machine Pistol"
+     ],
+     "Socket0": [
+      "<none>",
+      "RightHand"
+     ]
+    }
+   },
+   {
+    "op": "edit",
+    "index": 1585,
+    "class": "CAI",
+    "name": "ExitWH_Heavy_ASSR_GD00",
+    "weapon": "sm15",
+    "needs_append": null,
+    "edits": {
+     "Weapon0": [
+      "Assault Rifle",
+      "zSFODD_Machine Pistol"
+     ]
+    }
+   },
+   {
+    "op": "edit",
+    "index": 1588,
+    "class": "CAI",
+    "name": "ExitWH_Soldier_SMG_GD00",
+    "weapon": "sm15",
+    "needs_append": null,
+    "edits": {
+     "Weapon0": [
+      "Submachinegun",
+      "zSFODD_Machine Pistol"
+     ]
+    }
+   },
+   {
+    "op": "edit",
+    "index": 1589,
+    "class": "CAI",
+    "name": "ExitWH_Soldier_ASSR_GD00",
+    "weapon": "sm15",
+    "needs_append": null,
+    "edits": {
+     "Weapon0": [
+      "Assault Rifle",
+      "zSFODD_Machine Pistol"
+     ]
+    }
+   },
+   {
+    "op": "edit",
+    "index": 3765,
+    "class": "WeaponItem",
+    "name": "PlasmaRifle-Lean01.P",
+    "weapon": "watson",
+    "needs_append": null,
+    "edits": {
+     "WeaponType": [
+      "Plasma weapon",
+      "zSFODD_AutoShotgun"
+     ],
+     "Filename": [
+      "guns\\models_hh\\plasmagun.Model00p",
+      "guns\\models_hh\\WatsonSAS.Model00p"
+     ]
+    },
+    "console": {
+     "props": [
+      "Pos"
+     ],
+     "world": "factoryb"
+    }
+   },
+   {
+    "op": "edit",
+    "index": 3767,
+    "class": "WeaponItem",
+    "name": "PlasmaRifle-Lean02.P",
+    "weapon": "watson",
+    "needs_append": null,
+    "edits": {
+     "WeaponType": [
+      "Plasma weapon",
+      "zSFODD_AutoShotgun"
+     ],
+     "Filename": [
+      "guns\\models_hh\\plasmagun.Model00p",
+      "guns\\models_hh\\WatsonSAS.Model00p"
+     ]
+    },
+    "console": {
+     "props": [
+      "Pos"
+     ],
+     "world": "factoryb"
+    }
+   }
+  ]
+ },
+ "Getting_Out": {
+  "ops": [
+   {
+    "op": "edit",
+    "index": 1324,
+    "class": "CAI",
+    "name": "gar_deadATC01",
+    "weapon": "sm15",
+    "needs_append": null,
+    "edits": {
+     "Weapon0": [
+      "<none>",
+      "zSFODD_Machine Pistol"
+     ],
+     "Socket0": [
+      "<none>",
+      "RightHand"
+     ]
+    }
+   },
+   {
+    "op": "append",
+    "class": "WeaponItem",
+    "base_index": 3285,
+    "base_name": "Nailgun-Lean00.NG",
+    "new_name": "MachPist01",
+    "set": {
+     "WeaponType": "zSFODD_Machine Pistol",
+     "Filename": "guns\\models_hh\\SM15machinePistol.Model00p",
+     "Name": "MachPist01"
+    },
+    "weapon": "sm15",
+    "console": {
+     "props": [
+      "AmmoAmount",
+      "AmmoType",
+      "DMTouchPickup",
+      "GlobalResources",
+      "Gravity",
+      "Health",
+      "LifeTime",
+      "Locked",
+      "MPRespawn",
+      "Material",
+      "Model",
+      "ModelOverride",
+      "MoveToFloor",
+      "PickupCommand",
+      "Placed",
+      "Pos",
+      "RespawnTime",
+      "Rotation",
+      "SPRespawn",
+      "Scale",
+      "Shadow",
+      "Solid",
+      "Team",
+      "Template",
+      "TouchPickup",
+      "Visible",
+      "WorldAnimation"
+     ]
+    }
+   },
+   {
+    "op": "append",
+    "class": "WeaponItem",
+    "base_index": 3285,
+    "base_name": "Nailgun-Lean00.NG",
+    "new_name": "MachPist02",
+    "set": {
+     "WeaponType": "zSFODD_Machine Pistol",
+     "Filename": "guns\\models_hh\\SM15machinePistol.Model00p",
+     "Name": "MachPist02"
+    },
+    "weapon": "sm15",
+    "console": {
+     "props": [
+      "AmmoAmount",
+      "AmmoType",
+      "DMTouchPickup",
+      "GlobalResources",
+      "Gravity",
+      "Health",
+      "LifeTime",
+      "Locked",
+      "MPRespawn",
+      "Material",
+      "Model",
+      "ModelOverride",
+      "MoveToFloor",
+      "PickupCommand",
+      "Placed",
+      "Pos",
+      "RespawnTime",
+      "Rotation",
+      "SPRespawn",
+      "Scale",
+      "Shadow",
+      "Solid",
+      "Team",
+      "Template",
+      "TouchPickup",
+      "Visible",
+      "WorldAnimation"
+     ]
+    }
+   },
+   {
+    "op": "append",
+    "class": "WeaponItem",
+    "base_index": 1614,
+    "base_name": "Grenade-Frag-02",
+    "new_name": "MachPist03",
+    "set": {
+     "WeaponType": "zSFODD_Machine Pistol",
+     "Filename": "guns\\models_hh\\SM15machinePistol.Model00p",
+     "Name": "MachPist03"
+    },
+    "weapon": "sm15",
+    "console": {
+     "props": [
+      "AmmoAmount",
+      "AmmoType",
+      "DMTouchPickup",
+      "GlobalResources",
+      "Gravity",
+      "Health",
+      "LifeTime",
+      "Locked",
+      "MPRespawn",
+      "Material",
+      "Model",
+      "ModelOverride",
+      "MoveToFloor",
+      "PickupCommand",
+      "Placed",
+      "Pos",
+      "RespawnTime",
+      "Rotation",
+      "SPRespawn",
+      "Scale",
+      "Shadow",
+      "Solid",
+      "Team",
+      "Template",
+      "TouchPickup",
+      "Visible",
+      "WorldAnimation"
+     ]
+    }
+   },
+   {
+    "op": "append",
+    "class": "WeaponItem",
+    "base_index": 1614,
+    "base_name": "Grenade-Frag-02",
+    "new_name": "MachPist04",
+    "set": {
+     "WeaponType": "zSFODD_Machine Pistol",
+     "Filename": "guns\\models_hh\\SM15machinePistol.Model00p",
+     "Name": "MachPist04"
+    },
+    "weapon": "sm15",
+    "console": {
+     "props": [
+      "AmmoAmount",
+      "AmmoType",
+      "DMTouchPickup",
+      "GlobalResources",
+      "Gravity",
+      "Health",
+      "LifeTime",
+      "Locked",
+      "MPRespawn",
+      "Material",
+      "Model",
+      "ModelOverride",
+      "MoveToFloor",
+      "PickupCommand",
+      "Placed",
+      "Pos",
+      "RespawnTime",
+      "Rotation",
+      "SPRespawn",
+      "Scale",
+      "Shadow",
+      "Solid",
+      "Team",
+      "Template",
+      "TouchPickup",
+      "Visible",
+      "WorldAnimation"
+     ]
+    }
+   }
+  ]
+ },
+ "Hives": {
+  "ops": [
+   {
+    "op": "edit",
+    "index": 264,
+    "class": "CAI",
+    "name": "Encounter_Cafateria_SGT",
+    "weapon": "sm15",
+    "needs_append": null,
+    "edits": {
+     "Weapon0": [
+      "Assault rifle",
+      "zSFODD_Machine Pistol"
+     ]
+    }
+   },
+   {
+    "op": "edit",
+    "index": 583,
+    "class": "CAI",
+    "name": "Executed_Work_ART",
+    "weapon": "sm15",
+    "needs_append": null,
+    "edits": {
+     "Weapon0": [
+      "Submachinegun",
+      "zSFODD_Machine Pistol"
+     ]
+    }
+   },
+   {
+    "op": "edit",
+    "index": 662,
+    "class": "CAI",
+    "name": "Delta_hallfight_delta_T",
+    "weapon": "sm15",
+    "needs_append": null,
+    "edits": {
+     "Weapon0": [
+      "Submachinegun",
+      "zSFODD_Machine Pistol"
+     ]
+    }
+   }
+  ]
+ },
+ "Mapes_Elevator": {
+  "ops": [
+   {
+    "op": "edit",
+    "index": 195,
+    "class": "AISpawner",
+    "name": "Labs_S02.Sp",
+    "weapon": "sm15",
+    "needs_append": "Security_SMgT00",
+    "edits": {
+     "Target": [
+      "Security_ART",
+      "Security_SMgT00"
+     ]
+    }
+   },
+   {
+    "op": "edit",
+    "index": 199,
+    "class": "AISpawner",
+    "name": "Labs_S01.Sp",
+    "weapon": "sm15",
+    "needs_append": "Security_SMgT00",
+    "edits": {
+     "Target": [
+      "Security_SMgT",
+      "Security_SMgT00"
+     ]
+    }
+   },
+   {
+    "op": "edit",
+    "index": 480,
+    "class": "CAI",
+    "name": "Loading_SMgT",
+    "weapon": "sm15",
+    "needs_append": null,
+    "edits": {
+     "Weapon0": [
+      "<none>",
+      "zSFODD_Machine Pistol"
+     ],
+     "Socket0": [
+      "<none>",
+      "RightHand"
+     ]
+    }
+   },
+   {
+    "op": "append",
+    "class": "CAI",
+    "base_index": 274,
+    "base_name": "Security_ART",
+    "new_name": "Security_SMgT00",
+    "set": {
+     "Weapon0": "zSFODD_Machine Pistol",
+     "Socket0": "RightHand",
+     "Name": "Security_SMgT00",
+     "Template": true
+    },
+    "weapon": "sm15",
+    "console": {
+     "props": [
+      "Pos",
+      "Rotation"
+     ]
+    }
+   }
+  ]
+ },
+ "Moody": {
+  "ops": [
+   {
+    "op": "edit",
+    "index": 528,
+    "class": "CAI",
+    "name": "Moody_Search_ART",
+    "weapon": "sm15",
+    "needs_append": null,
+    "edits": {
+     "Weapon0": [
+      "Assault Rifle",
+      "zSFODD_Machine Pistol"
+     ]
+    }
+   }
+  ]
+ },
+ "Vault": {
+  "ops": [
+   {
+    "op": "edit",
+    "index": 316,
+    "class": "AISpawner",
+    "name": "EnemyRun.SP03",
+    "weapon": "watson",
+    "needs_append": "EnemyRun.TA00",
+    "edits": {
+     "Target": [
+      "EnemyRun.TA",
+      "EnemyRun.TA00"
+     ]
+    }
+   },
+   {
+    "op": "edit",
+    "index": 1751,
+    "class": "WeaponItem",
+    "name": "Cannon01.C",
+    "weapon": "watson",
+    "needs_append": null,
+    "edits": {
+     "WeaponType": [
+      "Cannon",
+      "zSFODD_AutoShotgun"
+     ],
+     "Filename": [
+      "guns\\models_hh\\cannon.Model00p",
+      "guns\\models_hh\\WatsonSAS.Model00p"
+     ]
+    },
+    "console": {
+     "props": [
+      "Pos"
+     ]
+    }
+   },
+   {
+    "op": "append",
+    "class": "CAI",
+    "base_index": 313,
+    "base_name": "EnemyRun.TA",
+    "new_name": "EnemyRun.TA00",
+    "set": {
+     "Weapon0": "zSFODD_AutoShotgun",
+     "Socket0": "RightHand",
+     "Name": "EnemyRun.TA00",
+     "Template": true
+    },
+    "weapon": "watson",
+    "console": {
+     "props": [
+      "Pos",
+      "Rotation"
+     ]
+    }
+   }
+  ]
+ },
+ "WTF_Ambush": {
+  "ops": [
+   {
+    "op": "edit",
+    "index": 48,
+    "class": "CAI",
+    "name": "I03P01_Yard_AI_AR_Guard",
+    "weapon": "sm15",
+    "needs_append": null,
+    "edits": {
+     "Weapon0": [
+      "<none>",
+      "zSFODD_Machine Pistol"
+     ],
+     "Socket0": [
+      "<none>",
+      "RightHand"
+     ]
+    }
+   },
+   {
+    "op": "edit",
+    "index": 778,
+    "class": "CAI",
+    "name": "caiT",
+    "weapon": "sm15",
+    "needs_append": null,
+    "edits": {
+     "Weapon0": [
+      "Assault rifle",
+      "zSFODD_Machine Pistol"
+     ]
+    }
+   },
+   {
+    "op": "edit",
+    "index": 1225,
+    "class": "CAI",
+    "name": "Ambush_Sol_SG",
+    "weapon": "sm15",
+    "needs_append": null,
+    "edits": {
+     "Weapon0": [
+      "<none>",
+      "zSFODD_Machine Pistol"
+     ],
+     "Socket0": [
+      "<none>",
+      "RightHand"
+     ]
+    }
+   },
+   {
+    "op": "edit",
+    "index": 1220,
+    "class": "AISpawner",
+    "name": "Ambush_S04.Sp",
+    "weapon": "sm15",
+    "needs_append": null,
+    "edits": {
+     "Target": [
+      "Ambush_Sol_Ass",
+      "Ambush_Sol_SG"
+     ]
+    }
+   }
+  ]
+ },
+ "WTF_Entry": {
+  "ops": [
+   {
+    "op": "edit",
+    "index": 544,
+    "class": "AISpawner",
+    "name": "210_Yard_Patrol_Loop00.Sp",
+    "weapon": "sm15",
+    "needs_append": "210_Yard_CAI_T01",
+    "edits": {
+     "Target": [
+      "210_Yard_CAI_T00",
+      "210_Yard_CAI_T01"
+     ]
+    }
+   },
+   {
+    "op": "edit",
+    "index": 548,
+    "class": "AISpawner",
+    "name": "210_Yard_Patrol_Loop01.Sp",
+    "weapon": "sm15",
+    "needs_append": "210_Yard_CAI_T01",
+    "edits": {
+     "Target": [
+      "210_Yard_CAI_T00",
+      "210_Yard_CAI_T01"
+     ]
+    }
+   },
+   {
+    "op": "edit",
+    "index": 552,
+    "class": "AISpawner",
+    "name": "210_Yard_Patrol_Loop02.Sp",
+    "weapon": "sm15",
+    "needs_append": "210_Yard_CAI_T01",
+    "edits": {
+     "Target": [
+      "210_Yard_CAI_T00",
+      "210_Yard_CAI_T01"
+     ]
+    }
+   },
+   {
+    "op": "edit",
+    "index": 556,
+    "class": "AISpawner",
+    "name": "210_Yard_Patrol_Loop03.Sp",
+    "weapon": "sm15",
+    "needs_append": "210_Yard_CAI_T01",
+    "edits": {
+     "Target": [
+      "210_Yard_CAI_T00",
+      "210_Yard_CAI_T01"
+     ]
+    }
+   },
+   {
+    "op": "edit",
+    "index": 889,
+    "class": "CAI",
+    "name": "WTF_Bldg1_TEMP",
+    "weapon": "sm15",
+    "needs_append": null,
+    "edits": {
+     "Weapon0": [
+      "Submachinegun",
+      "zSFODD_Machine Pistol"
+     ]
+    }
+   },
+   {
+    "op": "append",
+    "class": "CAI",
+    "base_index": 561,
+    "base_name": "210_Yard_CAI_T00",
+    "new_name": "210_Yard_CAI_T01",
+    "set": {
+     "Socket0": "RightHand",
+     "Weapon0": "zSFODD_Machine Pistol",
+     "Name": "210_Yard_CAI_T01",
+     "Template": true
+    },
+    "weapon": "sm15",
+    "console": {
+     "props": [
+      "Pos",
+      "Rotation"
+     ]
+    }
+   }
+  ]
+ },
+ "WTF_Exfil": {
+  "ops": [
+   {
+    "op": "edit",
+    "index": 405,
+    "class": "CAI",
+    "name": "ExitWTF_Garage_ART",
+    "weapon": "sm15",
+    "needs_append": null,
+    "edits": {
+     "Weapon0": [
+      "Assault rifle",
+      "zSFODD_Machine Pistol"
+     ]
+    }
+   },
+   {
+    "op": "edit",
+    "index": 652,
+    "class": "CAI",
+    "name": "Exit_Guard_SMgT",
+    "weapon": "sm15",
+    "needs_append": null,
+    "edits": {
+     "Weapon0": [
+      "Submachinegun",
+      "zSFODD_Machine Pistol"
+     ]
+    }
+   },
+   {
+    "op": "append",
+    "class": "WeaponItem",
+    "base_index": 964,
+    "base_name": "Frag02",
+    "new_name": "MachPist01",
+    "set": {
+     "WeaponType": "zSFODD_Machine Pistol",
+     "Filename": "guns\\models_hh\\SM15machinePistol.Model00p",
+     "Name": "MachPist01"
+    },
+    "weapon": "sm15",
+    "console": {
+     "props": [
+      "AmmoAmount",
+      "AmmoType",
+      "DMTouchPickup",
+      "GlobalResources",
+      "Gravity",
+      "Health",
+      "LifeTime",
+      "Locked",
+      "MPRespawn",
+      "Material",
+      "Model",
+      "ModelOverride",
+      "MoveToFloor",
+      "PickupCommand",
+      "Placed",
+      "Pos",
+      "RespawnTime",
+      "Rotation",
+      "SPRespawn",
+      "Scale",
+      "Shadow",
+      "Solid",
+      "Team",
+      "Template",
+      "TouchPickup",
+      "Visible",
+      "WorldAnimation"
+     ]
+    }
+   },
+   {
+    "op": "append",
+    "class": "WeaponItem",
+    "base_index": 964,
+    "base_name": "Frag02",
+    "new_name": "MachPist02",
+    "set": {
+     "WeaponType": "zSFODD_Machine Pistol",
+     "Filename": "guns\\models_hh\\SM15machinePistol.Model00p",
+     "Name": "MachPist02"
+    },
+    "weapon": "sm15",
+    "console": {
+     "props": [
+      "AmmoAmount",
+      "AmmoType",
+      "DMTouchPickup",
+      "GlobalResources",
+      "Gravity",
+      "Health",
+      "LifeTime",
+      "Locked",
+      "MPRespawn",
+      "Material",
+      "Model",
+      "ModelOverride",
+      "MoveToFloor",
+      "PickupCommand",
+      "Placed",
+      "Pos",
+      "RespawnTime",
+      "Rotation",
+      "SPRespawn",
+      "Scale",
+      "Shadow",
+      "Solid",
+      "Team",
+      "Template",
+      "TouchPickup",
+      "Visible",
+      "WorldAnimation"
+     ]
+    }
+   }
+  ]
+ }
+}
