@@ -4,7 +4,29 @@ Restores console-exclusive content from the PlayStation 3 and Xbox 360 versions 
 
 This includes the **SFOD-D bonus mission** and **Watson SAS-12 shotgun** from the PlayStation 3 version, along with the **Holiday bonus mission**, **SM15 machine pistol**, **Instant Action maps** and **Xbox 360 HUD** from the Xbox 360 version.
 
-**No copyrighted game files are included in the download.** Instead, the installer builds the mod locally using files from your own copies of the game. You will need:
+## Improvements over the console versions
+
+Beyond restoring the content, the mod also fixes problems that are in the original PlayStation 3 and Xbox 360 releases:
+
+**Watson SAS-12**
+
+- **Reload sounds in sync:** the drum-attach clicks and drum spin now play exactly with the reload animation, instead of running about a second late.
+- **Left hand on the gun:** the left hand now holds the shotgun instead of floating beside the barrel.
+- **No arm swing after reloading:** the left arm no longer swings outward after the reload animation finishes.
+
+**SFOD-D bonus mission**
+
+- **No floating hands in the death scene:** empty first-person hands no longer stay on screen when Alma kills the player.
+- **Delta01 no longer vanishes in the finale:** if you leave him behind, he now catches up and walks in for the final scene instead of disappearing.
+- **Opening radio line:** the first "Den Mother" line starts a second later, so it is no longer lost under the loading screen.
+
+**Instant Action**
+
+- **Rooftop gates:** the security gates now open as soon as every enemy wave is defeated, instead of only when you walk up to them.
+
+## What you need
+
+- **No copyrighted game files are included in the download.** Instead, the installer builds the mod locally using files from your own copies of the game. You will need:
 
 - **PC:** F.E.A.R. (Steam or GOG) with [EchoPatch](https://github.com/Wemino/EchoPatch) installed.
 - **PlayStation 3:** your copy of the game as a decrypted disc folder.
